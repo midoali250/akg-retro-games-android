@@ -1,0 +1,20 @@
+name: Audit published Android APK library
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download previous published signed APK and verify its identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p previous
+          gh release download akg-review-updater-2026-11-05 --repo "$GITHUB_REPOSITORY" --pattern '*.apk' --dir previous
+          echo 'ab5b309a3f1347a3b895de2203ab3465eecd7071a82bfae4b8c26f4fe5f1e447  previous/AKG-Retro-Games-Android-signed.apk' | sha256sum --check
+      - name: Compare APK game files, catalog and hashes
+        run: python3 scripts/verify_apk_games.py previous/AKG-Retro-Games-Android-signed.apk
