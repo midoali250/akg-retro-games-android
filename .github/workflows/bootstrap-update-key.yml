@@ -1,0 +1,51 @@
+name: Bootstrap independent update signing key
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [create, verify]
+        required: true
+      repository_key:
+        description: GitHub Actions secret encryption public key
+        required: false
+      repository_key_id:
+        required: false
+      backup_key:
+        description: GitHub Actions backup secret encryption public key
+        required: false
+      backup_key_id:
+        required: false
+      expected_public_key:
+        required: false
+permissions:
+  contents: read
+jobs:
+  key:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install cryptographic implementation
+        run: python -m pip install 'PyNaCl==1.5.0'
+      - name: Create sealed signing key or verify stored key
+        env:
+          BOOTSTRAP_MODE: ${{ inputs.mode }}
+          REPO_KEY: ${{ inputs.repository_key }}
+          REPO_KEY_ID: ${{ inputs.repository_key_id }}
+          BACKUP_KEY: ${{ inputs.backup_key }}
+          BACKUP_KEY_ID: ${{ inputs.backup_key_id }}
+          EXPECTED_PUBLIC_KEY: ${{ inputs.expected_public_key }}
+          SIGNING_SEED: ${{ secrets.AKG_UPDATE_SIGNING_SEED }}
+        run: python scripts/bootstrap_update_key.py
+      - name: Upload only encrypted key payloads
+        if: inputs.mode == 'create'
+        uses: actions/upload-artifact@v4
+        with:
+          name: encrypted-update-key
+          path: encrypted-update-key.json
+          retention-days: 1
+          if-no-files-found: error
