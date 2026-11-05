@@ -1,0 +1,28 @@
+name: Publish selected review build
+on:
+  workflow_dispatch:
+    inputs:
+      build_run_id:
+        description: Successful platform build run ID
+        required: true
+      release_tag:
+        description: New review release tag
+        required: true
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Publish checksum-verified review package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RUN_ID: ${{ inputs.build_run_id }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: python scripts/publish_review_build.py
