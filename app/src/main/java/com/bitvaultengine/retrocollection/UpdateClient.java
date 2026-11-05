@@ -53,7 +53,7 @@ final class UpdateClient {
         }catch(Exception e){onUi(()->{busy=false;if(!quiet)message("Update check failed","Could not verify the Android update: "+e.getClass().getSimpleName());});}},"akg-update-check").start();
     }
     private void download(UpdateSecurity.Release release){if(busy)return;busy=true;android.widget.Toast.makeText(activity,"Downloading verified update…",android.widget.Toast.LENGTH_LONG).show();new Thread(()->{
-        File dir=new File(activity.getCacheDir(),"updates"),tmp=new File(dir,"download.part"),dest=new File(dir,"verified.apk");try{
+        File dir=new File(activity.getCacheDir(),"updates"),tmp=new File(dir,"download-part.apk"),dest=new File(dir,"verified.apk");try{
             if(!dir.exists()&&!dir.mkdirs())throw new IllegalStateException("Cannot create update directory");HttpURLConnection c=open(release.url);if(c.getResponseCode()!=200){c.disconnect();throw new IllegalStateException("Download failed");}MessageDigest sha=MessageDigest.getInstance("SHA-256");long size=0;
             try(InputStream in=c.getInputStream();FileOutputStream out=new FileOutputStream(tmp)){byte[] b=new byte[65536];int n;while((n=in.read(b))!=-1){size+=n;if(size>release.size)throw new SecurityException("Package too large");sha.update(b,0,n);out.write(b,0,n);}out.getFD().sync();}finally{c.disconnect();}
             StringBuilder digest=new StringBuilder();for(byte v:sha.digest())digest.append(String.format(java.util.Locale.ROOT,"%02x",v&255));if(size!=release.size||!release.sha.equals(digest.toString()))throw new SecurityException("Update hash mismatch");verifyApk(tmp,release.version);if(!tmp.renameTo(dest))throw new IllegalStateException("Cannot save update");pending=dest;
