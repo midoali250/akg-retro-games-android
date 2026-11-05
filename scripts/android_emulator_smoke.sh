@@ -9,7 +9,7 @@ diagnose() {
 trap 'diagnose' ERR
 APK=$(find apk -name '*.apk' -type f -print -quit);test -n "$APK"
 adb install -r "$APK"
-adb shell wm size 1280x720
+adb shell wm size 640x1280
 PKG=com.bitvaultengine.retrocollection.preview
 ACT=com.bitvaultengine.retrocollection.MainActivity
 for GAME in 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT; do
@@ -22,11 +22,11 @@ for GAME in 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT;
     sleep 2
   done
   adb logcat -d -s AKG_ANDROID:V | grep -q 'PLAYER_READY'
-  adb shell input tap 1152 504
-  adb shell input tap 1024 576
-  adb shell input tap 1024 432
-  adb shell input tap 896 504
-  adb shell input tap 235 518
+  adb shell input tap 1152 448
+  adb shell input tap 1024 512
+  adb shell input tap 1024 384
+  adb shell input tap 896 448
+  adb shell input tap 235 461
   for i in $(seq 1 90); do
     if adb logcat -d -s AKG_ANDROID_SMOKE:I | grep -q 'PASS'; then break; fi
     if adb logcat -d -s AKG_ANDROID:E | grep -q 'Player failed'; then adb logcat -d -s AKG_ANDROID:E; exit 1; fi
