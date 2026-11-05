@@ -1,0 +1,1602 @@
+{
+  "scope": "Memory enforcement and reset only. The named gameplay effect, compatibility throughout play, and safety are NOT proven. Inconclusive is not a proven invalid code. Do not auto-enable.",
+  "source_commit": "6099988fec4c52a4a7294a619795f4b983cf6bb1",
+  "summary": {
+    "games_probed": 22,
+    "download_or_core_errors": 0,
+    "codes_tested": 57,
+    "memory_enforcement_and_reset_observed": 57
+  },
+  "games": [
+    {
+      "source_id": "1l6HOfs1ADS33xfHGKwcePKEka7Trc2z-",
+      "title": "Arkista's Ring (U) [!].nes",
+      "rom_sha256": "b51252bc28ea52ac5c289ce5dda2be572cfec959e6a633068295ec074cc0e65a",
+      "codes": [
+        {
+          "code": "0001:10",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Arkista%27s%20Ring%20%28USA%29.cht"
+        },
+        {
+          "code": "0031:09",
+          "label": "Infinite Continues",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Arkista%27s%20Ring%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "0001:10",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Arkista%27s%20Ring%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 1,
+          "target_value": 16,
+          "during": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "after_reset": [
+            239,
+            239,
+            239
+          ]
+        },
+        {
+          "code": "0031:09",
+          "label": "Infinite Continues",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Arkista%27s%20Ring%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 49,
+          "target_value": 9,
+          "during": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "after_reset": [
+            246,
+            246,
+            246
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1yPkcMPhiZJMuW2WHj3PDfn7gvcgls8zH",
+      "title": "Batman - The Video Game (USA).nes",
+      "rom_sha256": "b309ba13d978ce2cc12bc0878886cc1560b8eacbff55015e56aa7f3609f8cfec",
+      "codes": [
+        {
+          "code": "00B7:08",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht"
+        },
+        {
+          "code": "00B8:63",
+          "label": "Infinite weapons, all 3 kinds",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht"
+        },
+        {
+          "code": "00CC:A4",
+          "label": "Completely Invincible",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht"
+        },
+        {
+          "code": "00CC:72",
+          "label": "Invincible",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00B7:08",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 183,
+          "target_value": 8,
+          "during": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "after_reset": [
+            247,
+            247,
+            247
+          ]
+        },
+        {
+          "code": "00B8:63",
+          "label": "Infinite weapons, all 3 kinds",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 184,
+          "target_value": 99,
+          "during": [
+            99,
+            99,
+            99,
+            99
+          ],
+          "after_reset": [
+            156,
+            156,
+            156
+          ]
+        },
+        {
+          "code": "00CC:A4",
+          "label": "Completely Invincible",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 204,
+          "target_value": 164,
+          "during": [
+            164,
+            164,
+            164,
+            164
+          ],
+          "after_reset": [
+            91,
+            91,
+            91
+          ]
+        },
+        {
+          "code": "00CC:72",
+          "label": "Invincible",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Batman%20-%20The%20Video%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 204,
+          "target_value": 114,
+          "during": [
+            114,
+            114,
+            114,
+            114
+          ],
+          "after_reset": [
+            141,
+            141,
+            141
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1f5nmnQwEwgEJs2rWWpvchjb28kt3aQBH",
+      "title": "Bugs Bunny Crazy Castle, The (USA).nes",
+      "rom_sha256": "1d1bd6bc31073f64af62f8cd898bc646f2cb1128b04c21f105d0bc7216c839b4",
+      "codes": [
+        {
+          "code": "007C:05",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Bugs%20Bunny%20Crazy%20Castle%2C%20The%20%28USA%29.cht"
+        },
+        {
+          "code": "007C:63",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Bugs%20Bunny%20Crazy%20Castle%2C%20The%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "007C:05",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Bugs%20Bunny%20Crazy%20Castle%2C%20The%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 124,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        },
+        {
+          "code": "007C:63",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Bugs%20Bunny%20Crazy%20Castle%2C%20The%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 124,
+          "target_value": 99,
+          "during": [
+            99,
+            99,
+            99,
+            99
+          ],
+          "after_reset": [
+            156,
+            156,
+            156
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1ZmxVoPRV2bKPOhXGIAF8fWojZktCHacz",
+      "title": "Chip 'n Dale - Rescue Rangers (USA).nes",
+      "rom_sha256": "b44ad2bd58d681e13eaa3b1bb6aa411be7cdf6bd79ab774492264c1a3c3e25a3",
+      "codes": [
+        {
+          "code": "00F8:05",
+          "label": "Infinite Continues",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht"
+        },
+        {
+          "code": "005E:FA",
+          "label": "Invincibility [Player 1]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht"
+        },
+        {
+          "code": "005F:FA",
+          "label": "Invincibility [Player 2]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht"
+        },
+        {
+          "code": "004F:02",
+          "label": "Infinite Time In Bonus Stages",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00F8:05",
+          "label": "Infinite Continues",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 248,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        },
+        {
+          "code": "005E:FA",
+          "label": "Invincibility [Player 1]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 94,
+          "target_value": 250,
+          "during": [
+            250,
+            250,
+            250,
+            250
+          ],
+          "after_reset": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "code": "005F:FA",
+          "label": "Invincibility [Player 2]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 95,
+          "target_value": 250,
+          "during": [
+            250,
+            250,
+            250,
+            250
+          ],
+          "after_reset": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "code": "004F:02",
+          "label": "Infinite Time In Bonus Stages",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 79,
+          "target_value": 2,
+          "during": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "after_reset": [
+            253,
+            253,
+            253
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1PyKCVc3aTTPlel9octkC5eVGdYWquLin",
+      "title": "Chip 'n Dale Rescue Rangers 2 (U) [!].nes",
+      "rom_sha256": "34ca559b733ed910b0a493a0cb1f5d64e5cd9e7e4796032d986c08079573e047",
+      "codes": [
+        {
+          "code": "00A7:03",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00D8:03",
+          "label": "Invincibility P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00A3:FF",
+          "label": "Infinite R&R Icons P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00A7:09",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00A7:03",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 167,
+          "target_value": 3,
+          "during": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "after_reset": [
+            252,
+            252,
+            252
+          ]
+        },
+        {
+          "code": "00D8:03",
+          "label": "Invincibility P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 216,
+          "target_value": 3,
+          "during": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "after_reset": [
+            252,
+            252,
+            252
+          ]
+        },
+        {
+          "code": "00A3:FF",
+          "label": "Infinite R&R Icons P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 163,
+          "target_value": 255,
+          "during": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "after_reset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "code": "00A7:09",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Chip%20%27n%20Dale%20-%20Rescue%20Rangers%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 167,
+          "target_value": 9,
+          "during": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "after_reset": [
+            246,
+            246,
+            246
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1RJQxivXURIeQ4q7J3M7RpQapmLOmbMuD",
+      "title": "Darkwing Duck (USA).nes",
+      "rom_sha256": "b7fff97f34d7142765685c6505ad54285cfd7e847e6943bc53e432c4f25fa49c",
+      "codes": [
+        {
+          "code": "007C:01",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Darkwing%20Duck%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "007C:01",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Darkwing%20Duck%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 124,
+          "target_value": 1,
+          "during": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "after_reset": [
+            254,
+            254,
+            254
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1oDncUUhTgRUGblsHDgfiZWOlBTIVGevf",
+      "title": "DARKWING.NES",
+      "rom_sha256": "5e9dae602c0a4a27d396e2fa4e7d7f7c5a817fff38d193eca942386b3d137dd8",
+      "codes": [
+        {
+          "code": "007C:01",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Darkwing%20Duck%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "007C:01",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Darkwing%20Duck%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 124,
+          "target_value": 1,
+          "during": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "after_reset": [
+            254,
+            254,
+            254
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1ETCKylIoq9bXc-swsEbjoHsXECkE0BIh",
+      "title": "DTALES1.NES",
+      "rom_sha256": "97d472f7b2c1088448d1644155b2650a546bad887b3cba571e16d7986824c169",
+      "codes": [
+        {
+          "code": "007D:FA",
+          "label": "Invincibility [Flashing]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht"
+        },
+        {
+          "code": "0075:01",
+          "label": "Invincibility [Star Effect]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "007D:FA",
+          "label": "Invincibility [Flashing]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 125,
+          "target_value": 250,
+          "during": [
+            250,
+            250,
+            250,
+            250
+          ],
+          "after_reset": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "code": "0075:01",
+          "label": "Invincibility [Star Effect]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 117,
+          "target_value": 1,
+          "during": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "after_reset": [
+            254,
+            254,
+            254
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "15ETWVe4rirjgmZtUc8FShshJIFI8b2Wk",
+      "title": "Duck Tales 2 (U).nes",
+      "rom_sha256": "c842683db5bd5a21bfc796903a733f4772a612709d10e9c880e76159963bddda",
+      "codes": [
+        {
+          "code": "00CF:48",
+          "label": "Infinite Life",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00CE:09",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00AF:02",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00CF:30",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00CF:48",
+          "label": "Infinite Life",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 207,
+          "target_value": 72,
+          "during": [
+            72,
+            72,
+            72,
+            72
+          ],
+          "after_reset": [
+            183,
+            183,
+            183
+          ]
+        },
+        {
+          "code": "00CE:09",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 206,
+          "target_value": 9,
+          "during": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "after_reset": [
+            246,
+            246,
+            246
+          ]
+        },
+        {
+          "code": "00AF:02",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 175,
+          "target_value": 2,
+          "during": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "after_reset": [
+            253,
+            253,
+            253
+          ]
+        },
+        {
+          "code": "00CF:30",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 207,
+          "target_value": 48,
+          "during": [
+            48,
+            48,
+            48,
+            48
+          ],
+          "after_reset": [
+            207,
+            207,
+            207
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1DUVguUM8KVzWFiLZuVeG1sbGjBykMgWn",
+      "title": "DuckTales (USA).nes",
+      "rom_sha256": "c7419d5c1b4a78ff427e8d7beac13f9b006f813aec56092a92485e1185283367",
+      "codes": [
+        {
+          "code": "007D:FA",
+          "label": "Invincibility [Flashing]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht"
+        },
+        {
+          "code": "0075:01",
+          "label": "Invincibility [Star Effect]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "007D:FA",
+          "label": "Invincibility [Flashing]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 125,
+          "target_value": 250,
+          "during": [
+            250,
+            250,
+            250,
+            250
+          ],
+          "after_reset": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "code": "0075:01",
+          "label": "Invincibility [Star Effect]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 117,
+          "target_value": 1,
+          "during": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "after_reset": [
+            254,
+            254,
+            254
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1Mq8JP3-yljxwf8in16kF2PFS3h8V5Wpa",
+      "title": "DuckTales 2 (USA).nes",
+      "rom_sha256": "6400b8dedbb6273f5ea01b68c61453f7cf5cab64ea2a0f57d4d31dd4b983187b",
+      "codes": [
+        {
+          "code": "00CF:48",
+          "label": "Infinite Life",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00CE:09",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00AF:02",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        },
+        {
+          "code": "00CF:30",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00CF:48",
+          "label": "Infinite Life",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 207,
+          "target_value": 72,
+          "during": [
+            72,
+            72,
+            72,
+            72
+          ],
+          "after_reset": [
+            183,
+            183,
+            183
+          ]
+        },
+        {
+          "code": "00CE:09",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 206,
+          "target_value": 9,
+          "during": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "after_reset": [
+            246,
+            246,
+            246
+          ]
+        },
+        {
+          "code": "00AF:02",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 175,
+          "target_value": 2,
+          "during": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "after_reset": [
+            253,
+            253,
+            253
+          ]
+        },
+        {
+          "code": "00CF:30",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/DuckTales%202%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 207,
+          "target_value": 48,
+          "during": [
+            48,
+            48,
+            48,
+            48
+          ],
+          "after_reset": [
+            207,
+            207,
+            207
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1lAgQrNPh7PNn30mmmm6iu8MjSWHWBAt_",
+      "title": "Mario Bros. (World).nes",
+      "rom_sha256": "e56643baf429c03bc0577129bd9a459647ded725bddf06ff53139fd3fcf0171c",
+      "codes": [
+        {
+          "code": "0048:04",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mario%20Bros.%20%28World%29.cht"
+        },
+        {
+          "code": "004C:04",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mario%20Bros.%20%28World%29.cht"
+        },
+        {
+          "code": "0070:03",
+          "label": "Infinite POW Block",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mario%20Bros.%20%28World%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "0048:04",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mario%20Bros.%20%28World%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 72,
+          "target_value": 4,
+          "during": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "after_reset": [
+            251,
+            251,
+            251
+          ]
+        },
+        {
+          "code": "004C:04",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mario%20Bros.%20%28World%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 76,
+          "target_value": 4,
+          "during": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "after_reset": [
+            251,
+            251,
+            251
+          ]
+        },
+        {
+          "code": "0070:03",
+          "label": "Infinite POW Block",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mario%20Bros.%20%28World%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 112,
+          "target_value": 3,
+          "during": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "after_reset": [
+            252,
+            252,
+            252
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1bSDZxxL8ZPuSBNQwCBliUUUAoFdRFNJq",
+      "title": "Mickey Mousecapade (USA).nes",
+      "rom_sha256": "50e580bb32463df4579885a79e242bb830a6d0e7561f5318b73f5c26cea489c8",
+      "codes": [
+        {
+          "code": "00C2:0C",
+          "label": "Infinite Energy",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht"
+        },
+        {
+          "code": "00C1:03",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht"
+        },
+        {
+          "code": "00BB:43",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht"
+        },
+        {
+          "code": "00C2:0A",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00C2:0C",
+          "label": "Infinite Energy",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 194,
+          "target_value": 12,
+          "during": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "after_reset": [
+            243,
+            243,
+            243
+          ]
+        },
+        {
+          "code": "00C1:03",
+          "label": "Infinite Lives",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 193,
+          "target_value": 3,
+          "during": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "after_reset": [
+            252,
+            252,
+            252
+          ]
+        },
+        {
+          "code": "00BB:43",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 187,
+          "target_value": 67,
+          "during": [
+            67,
+            67,
+            67,
+            67
+          ],
+          "after_reset": [
+            188,
+            188,
+            188
+          ]
+        },
+        {
+          "code": "00C2:0A",
+          "label": "Infinite Health",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Mickey%20Mousecapade%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 194,
+          "target_value": 10,
+          "during": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "after_reset": [
+            245,
+            245,
+            245
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1L8KlYe5eIeS9BhEdJgNHIzkArOWQAQeM",
+      "title": "NARC.NES",
+      "rom_sha256": "721be1420476d69359f0695b92cb998add9b7e09d765e322c9660e20d9e3609b",
+      "codes": [
+        {
+          "code": "00A8:00",
+          "label": "P1 Infinite Health [Alternate]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht"
+        },
+        {
+          "code": "005E:71",
+          "label": "P1 Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht"
+        },
+        {
+          "code": "0098:05",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht"
+        },
+        {
+          "code": "00A1:58",
+          "label": "Infinite Energy P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00A8:00",
+          "label": "P1 Infinite Health [Alternate]",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 168,
+          "target_value": 0,
+          "during": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "after_reset": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "code": "005E:71",
+          "label": "P1 Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 94,
+          "target_value": 113,
+          "during": [
+            113,
+            113,
+            113,
+            113
+          ],
+          "after_reset": [
+            142,
+            142,
+            142
+          ]
+        },
+        {
+          "code": "0098:05",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 152,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        },
+        {
+          "code": "00A1:58",
+          "label": "Infinite Energy P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/NARC%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 161,
+          "target_value": 88,
+          "during": [
+            88,
+            88,
+            88,
+            88
+          ],
+          "after_reset": [
+            167,
+            167,
+            167
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1yUsGiRWMGg1QMS85dOonRa6iNRrS4mAK",
+      "title": "Race America (U) [!].nes",
+      "rom_sha256": "210ebd9ddf4134926301ebf539ee20abc805255cd681747f3f73abfe831e2dd3",
+      "codes": [
+        {
+          "code": "0008:03",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Alex%20DeMeo%27s%20Race%20America%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "0008:03",
+          "label": "Invincibility",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Alex%20DeMeo%27s%20Race%20America%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 8,
+          "target_value": 3,
+          "during": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "after_reset": [
+            252,
+            252,
+            252
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1MuFFxlcn54KlHdD6rAY6hmS04ToVt1Yw",
+      "title": "Spider-Man - Return of the Sinister Six (U) [!].nes",
+      "rom_sha256": "61c24c7d40cb0dec53326372c4d286f8af721d71a13c10b27b80241353242042",
+      "codes": [
+        {
+          "code": "00B5:3A",
+          "label": "Infinite Fly",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Spider-Man%20-%20Return%20of%20the%20Sinister%20Six%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00B5:3A",
+          "label": "Infinite Fly",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Spider-Man%20-%20Return%20of%20the%20Sinister%20Six%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 181,
+          "target_value": 58,
+          "during": [
+            58,
+            58,
+            58,
+            58
+          ],
+          "after_reset": [
+            197,
+            197,
+            197
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1yeGUxDGRasllPUrj7GRHK0HQrknmAO7T",
+      "title": "Spider-Man - Return of the Sinister Six (USA).nes",
+      "rom_sha256": "61c24c7d40cb0dec53326372c4d286f8af721d71a13c10b27b80241353242042",
+      "codes": [
+        {
+          "code": "00B5:3A",
+          "label": "Infinite Fly",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Spider-Man%20-%20Return%20of%20the%20Sinister%20Six%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00B5:3A",
+          "label": "Infinite Fly",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Spider-Man%20-%20Return%20of%20the%20Sinister%20Six%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 181,
+          "target_value": 58,
+          "during": [
+            58,
+            58,
+            58,
+            58
+          ],
+          "after_reset": [
+            197,
+            197,
+            197
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1Uwq1lLxeSDCGpOv85QsbmE7m1CpesMfg",
+      "title": "Super Mario Bros. + Duck Hunt (USA).nes",
+      "rom_sha256": "23ec3f6bb68f8774070ce936869e7f62ac3490449f58e62d6ed33a0fb385d456",
+      "codes": [
+        {
+          "code": "00BA:03",
+          "label": "Infinite Ammo",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Super%20Mario%20Bros.%20%2B%20Duck%20Hunt%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "00BA:03",
+          "label": "Infinite Ammo",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Super%20Mario%20Bros.%20%2B%20Duck%20Hunt%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 186,
+          "target_value": 3,
+          "during": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "after_reset": [
+            252,
+            252,
+            252
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1MXH_GZLIF6OrQImupaw_dSSHZxcuQ4ml",
+      "title": "Teenage Mutant Ninja Turtles (USA).nes",
+      "rom_sha256": "dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628",
+      "codes": [
+        {
+          "code": "0077:80",
+          "label": "Infinite Energy, Leo",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht"
+        },
+        {
+          "code": "0078:80",
+          "label": "Infinite Energy, Raph",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht"
+        },
+        {
+          "code": "0079:80",
+          "label": "Infinite Energy, Mike",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht"
+        },
+        {
+          "code": "007A:80",
+          "label": "Infinite Energy, Don",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "0077:80",
+          "label": "Infinite Energy, Leo",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 119,
+          "target_value": 128,
+          "during": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "after_reset": [
+            127,
+            127,
+            127
+          ]
+        },
+        {
+          "code": "0078:80",
+          "label": "Infinite Energy, Raph",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 120,
+          "target_value": 128,
+          "during": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "after_reset": [
+            127,
+            127,
+            127
+          ]
+        },
+        {
+          "code": "0079:80",
+          "label": "Infinite Energy, Mike",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 121,
+          "target_value": 128,
+          "during": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "after_reset": [
+            127,
+            127,
+            127
+          ]
+        },
+        {
+          "code": "007A:80",
+          "label": "Infinite Energy, Don",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 122,
+          "target_value": 128,
+          "during": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "after_reset": [
+            127,
+            127,
+            127
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1Y-8mJ_uUmhV4bROqlUaGDyx_p-0ybZ9d",
+      "title": "Teenage Mutant Ninja Turtles 3 (U).nes",
+      "rom_sha256": "8f4a42800c911214f4f9ffb42579dade607ee7e489a1c8c77d3b97395a7629ec",
+      "codes": [
+        {
+          "code": "006A:05",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht"
+        },
+        {
+          "code": "006B:05",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "006A:05",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 106,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        },
+        {
+          "code": "006B:05",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 107,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "19l8eH21fGVeMNB_zgEU5cjlm-0MGmGHI",
+      "title": "Teenage Mutant Ninja Turtles II - The Arcade Game (USA).nes",
+      "rom_sha256": "637fa9d773cb39fcd4e55faf46bc53f82ac9d7706f8473adeb06e2b9e95c2414",
+      "codes": [
+        {
+          "code": "0093:04",
+          "label": "Invincibility P.1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht"
+        },
+        {
+          "code": "0094:04",
+          "label": "Invincibility P.2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht"
+        },
+        {
+          "code": "004D:09",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht"
+        },
+        {
+          "code": "004E:09",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "0093:04",
+          "label": "Invincibility P.1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 147,
+          "target_value": 4,
+          "during": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "after_reset": [
+            251,
+            251,
+            251
+          ]
+        },
+        {
+          "code": "0094:04",
+          "label": "Invincibility P.2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 148,
+          "target_value": 4,
+          "during": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "after_reset": [
+            251,
+            251,
+            251
+          ]
+        },
+        {
+          "code": "004D:09",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 77,
+          "target_value": 9,
+          "during": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "after_reset": [
+            246,
+            246,
+            246
+          ]
+        },
+        {
+          "code": "004E:09",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20II%20-%20The%20Arcade%20Game%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 78,
+          "target_value": 9,
+          "during": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "after_reset": [
+            246,
+            246,
+            246
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": "1RZYLszH-IJ0lmdMt2X2gMMKPyU0jZnHx",
+      "title": "Teenage Mutant Ninja Turtles III - The Manhattan Project (USA).nes",
+      "rom_sha256": "d6dc27e16afd5d2ad151c0d593908aff9e59c9f710d2c559d5f13c856350560e",
+      "codes": [
+        {
+          "code": "006A:05",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht"
+        },
+        {
+          "code": "006B:05",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht"
+        }
+      ],
+      "results": [
+        {
+          "code": "006A:05",
+          "label": "Infinite Lives P1",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 106,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        },
+        {
+          "code": "006B:05",
+          "label": "Infinite Lives P2",
+          "source": "https://raw.githubusercontent.com/libretro/libretro-database/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Nintendo%20Entertainment%20System/Teenage%20Mutant%20Ninja%20Turtles%20III%20-%20The%20Manhattan%20Project%20%28USA%29.cht",
+          "status": "memory_enforcement_and_reset_observed",
+          "address": 107,
+          "target_value": 5,
+          "during": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "after_reset": [
+            250,
+            250,
+            250
+          ]
+        }
+      ],
+      "error": null
+    }
+  ],
+  "ci_evidence": "https://github.com/midoali250/akg-retro-games-linux/actions/runs/42011446252",
+  "attribution": "Candidate descriptions and codes researched from libretro-database, commit 6099988fec4c52a4a7294a619795f4b983cf6bb1; see each source URL and https://github.com/libretro/libretro-database/blob/6099988fec4c52a4a7294a619795f4b983cf6bb1/LICENSE . Rights and licensing of individual contributions require review."
+}
