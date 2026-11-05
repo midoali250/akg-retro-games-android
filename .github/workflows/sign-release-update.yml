@@ -1,0 +1,44 @@
+name: Sign platform release updates
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Published release tag
+        required: true
+      version_code:
+        description: Strictly increasing integer version code
+        required: true
+      asset_name:
+        description: Exact release asset name (optional if only one platform asset)
+        required: false
+permissions:
+  contents: write
+jobs:
+  sign:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/checkout@v4
+        with:
+          repository: midoali250/bitvault-engine
+          ref: 8c3814deeeb48cf82454f5148d942cab302c2616
+          path: engine-source
+          sparse-checkout: updates/publisher/python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install cryptography==44.0.3
+      - name: Hash and sign the platform release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AKG_UPDATE_SIGNING_SEED: ${{ secrets.AKG_UPDATE_SIGNING_SEED }}
+          RELEASE_TAG: ${{ inputs.release_tag || github.event.release.tag_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: python scripts/publish_signed_update.py
