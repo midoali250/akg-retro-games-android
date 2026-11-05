@@ -21,6 +21,9 @@ The Android installer asks for user confirmation. APK package ID, version and si
    manifest using this repository's `AKG_UPDATE_SIGNING_SEED` secret and
    uploads it. It refuses to overwrite an existing manifest. Check that the
    workflow succeeded before expecting the app to detect the update.
+   If the release was published by a workflow using `GITHUB_TOKEN`, GitHub
+   may suppress release-triggered workflows; run `Sign platform release
+   updates` manually for the tag and version instead.
 
 The private update signing seed is stored as an Actions secret; its separate
 backup is in the shared engine's Actions secrets. Android also has a distinct
