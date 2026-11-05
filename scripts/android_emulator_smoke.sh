@@ -66,3 +66,41 @@ for attempt in range(8):
  time.sleep(2)
 else:raise SystemExit('FAIL: About description not found or differs')
 PY
+
+# Exercise moving a real control through the settings dialog and check persisted positions.
+adb shell am force-stop "$PKG"
+adb logcat -c
+adb shell am start -n "$PKG/$ACT" --es game_id 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf --ez akg_ci_smoke true
+python3 - <<'PY'
+import subprocess,time,re,xml.etree.ElementTree as ET
+pkg='com.bitvaultengine.retrocollection.preview'
+def adb(*args):return subprocess.check_output(['adb',*args],timeout=35).decode('utf-8','replace')
+for _ in range(45):
+ if 'PLAYER_READY' in adb('logcat','-d','-s','AKG_ANDROID:V'):break
+ time.sleep(1)
+else:raise SystemExit('FAIL: game did not become ready for control-position test')
+adb('shell','input','tap','640','50')
+move=None
+for _ in range(8):
+ try:
+  adb('shell','uiautomator','dump','/sdcard/akg-settings.xml');root=ET.fromstring(adb('exec-out','cat','/sdcard/akg-settings.xml'))
+  move=next((n for n in root.iter('node') if n.get('text')=='Move controls'),None)
+  if move is not None:break
+ except Exception:pass
+ time.sleep(1)
+if move is None:raise SystemExit('FAIL: Move controls setting not found')
+b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',move.get('bounds',''))
+if not b:raise SystemExit('FAIL: move setting bounds unavailable')
+x1,y1,x2,y2=map(int,b.groups());adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2))
+adb('shell','input','swipe','1152','448','1075','360','800')
+adb('shell','input','tap','640','50')
+for _ in range(10):
+ try:
+  xml=ET.fromstring(adb('shell','run-as',pkg,'cat','shared_prefs/controls.xml'));vals={n.get('name'):n.get('value') for n in xml}
+  x=float(vals.get('x1','nan'));y=float(vals.get('y1','nan'))
+  if .82<x<.86 and .54<y<.58:
+   print('PASS Android control movement persisted: A position');break
+ except Exception:pass
+ time.sleep(1)
+else:raise SystemExit('FAIL: moved A position was not persisted')
+PY
