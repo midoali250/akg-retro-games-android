@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
+diagnose() {
+  echo '--- Android touch diagnostics ---'
+  adb shell wm size || true
+  adb shell dumpsys input | grep -E 'SurfaceOrientation|DisplayViewport' | head -20 || true
+  adb logcat -d -s AKG_ANDROID_TOUCH:I AKG_ANDROID:E AKG_ANDROID_SMOKE:I || true
+}
+trap 'diagnose' ERR
 APK=$(find apk -name '*.apk' -type f -print -quit);test -n "$APK"
 adb install -r "$APK"
 adb shell wm size 1280x720
