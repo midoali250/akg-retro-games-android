@@ -1,0 +1,21 @@
+name: Foundation checks (android)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test update metadata and file hash helpers
+        run: python -m unittest discover -s tests -v
+      - name: Validate platform identity and artwork files
+        shell: bash
+        run: |
+          python -c "import json,pathlib; c=json.loads(pathlib.Path('platform.json').read_text()); assert c['platform']=='android' and c['update_feed'] is None; assert pathlib.Path('assets/app-icon.png').read_bytes()[:8]==b'\x89PNG\r\n\x1a\n'; assert pathlib.Path('assets/menu-concept.jpg').read_bytes()[:2]==b'\xff\xd8'"
