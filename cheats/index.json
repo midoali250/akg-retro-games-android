@@ -1,0 +1,782 @@
+{
+  "schema_version": 1,
+  "note": "Exact ROM identity only; empty arrays are not functional cheats or stage selectors.",
+  "games": [
+    {
+      "source_id": "11PexIb6Tk9wnVvOV9Q0PQNKPj_z3MOqV",
+      "title": "Aladdin (Unl).nes",
+      "system": "NES",
+      "rom_sha256": "d0c67f33ba69aab28b1be0483622fd5688d624b5dd202153253e316941435f0a",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1l6HOfs1ADS33xfHGKwcePKEka7Trc2z-",
+      "title": "Arkista's Ring (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "b51252bc28ea52ac5c289ce5dda2be572cfec959e6a633068295ec074cc0e65a",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1PF5NcrY0jmGrYLo9yjf7wws7WfpEGx9q",
+      "title": "Baby Boomer (Unl) [!p].nes",
+      "system": "NES",
+      "rom_sha256": "0fe391306cea1e9f55b3e52edf19f883950cc0ba412971a5d31b9743928529d1",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1K9S_9dNRCkRaBtCVidaNtlGLEn4dywid",
+      "title": "Back to the Future Part II & III (USA).nes",
+      "system": "NES",
+      "rom_sha256": "233f8edf9573f247f6a23f00ea79c277ee8eff7e050107210eaa52645086017d",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1ylcSYQYTnfKrwA86P9G4D-vAhJkD-EgK",
+      "title": "BACKFUTR.NES",
+      "system": "NES",
+      "rom_sha256": "226fa3a1ba14aec352b901cf7f8b1281de4db64f2baa06fa5aad9ee587eeecb0",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1z0SSXdxHUJP_Hjl7EJ_WwlH2r_mPCJaZ",
+      "title": "BARBIE.NES",
+      "system": "NES",
+      "rom_sha256": "81d2d3ff5508eefdd85da58005674ed16c018a44cd38536953bb69e5ae2c12a1",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1yPkcMPhiZJMuW2WHj3PDfn7gvcgls8zH",
+      "title": "Batman - The Video Game (USA).nes",
+      "system": "NES",
+      "rom_sha256": "b309ba13d978ce2cc12bc0878886cc1560b8eacbff55015e56aa7f3609f8cfec",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1CDquXFFHw4P54FKigZ-lz6BF5bYAWd6p",
+      "title": "Batman Returns (USA).nes",
+      "system": "NES",
+      "rom_sha256": "9a38552714c657fe56ada8e7ac9f04b130f94a3bd957957c7a92debc8d17752b",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1fVI6eiXbmkN34IWdHtP5f55OCKJyjOA5",
+      "title": "BIRDWEEK.NES",
+      "system": "NES",
+      "rom_sha256": "cbfe822e257f5ef8a3984d419d7d0d199abaac544c7bb1c9242816e9181fd18e",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1elzjtsU1uXVyk3VdARBbcMvZruLicDmM",
+      "title": "Bugs Bunny Birthday Blowout, The (USA).nes",
+      "system": "NES",
+      "rom_sha256": "ef10ad586f75c51d6a3021f4419bbbae2b3772f0c9801e0df29cf5e95869eeea",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1f5nmnQwEwgEJs2rWWpvchjb28kt3aQBH",
+      "title": "Bugs Bunny Crazy Castle, The (USA).nes",
+      "system": "NES",
+      "rom_sha256": "1d1bd6bc31073f64af62f8cd898bc646f2cb1128b04c21f105d0bc7216c839b4",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1mcQLV54RuD4BUB7HMkZLpZpNUP8lZFl5",
+      "title": "Captain Tsubasa (J) [T-Eng].nes",
+      "system": "NES",
+      "rom_sha256": "109b66a211ace28b1ea3bbfac2107680ca5626b07caee557374136c217fb56f0",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1F--yd5tNvKEDZU_a9geF8DF8p4V4vPr2",
+      "title": "Captain Tsubasa Vol 2 - Super Striker (J) [p1].nes",
+      "system": "NES",
+      "rom_sha256": "abdd038e2fdcdd1398babe40c236a1af767a1bf0b19cb5fca4b0e63a058d5765",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1pFV8dGI8TiJyVR5bZbbPGnmurhZdhMUC",
+      "title": "CardCaptor Sakura (Tower of Druaga Hack).nes",
+      "system": "NES",
+      "rom_sha256": "ac9a7a78f56e286dfe7b213ed2660faf8fc2ed6a101c1632285691d4e8927903",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1ZmxVoPRV2bKPOhXGIAF8fWojZktCHacz",
+      "title": "Chip 'n Dale - Rescue Rangers (USA).nes",
+      "system": "NES",
+      "rom_sha256": "b44ad2bd58d681e13eaa3b1bb6aa411be7cdf6bd79ab774492264c1a3c3e25a3",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1PyKCVc3aTTPlel9octkC5eVGdYWquLin",
+      "title": "Chip 'n Dale Rescue Rangers 2 (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "34ca559b733ed910b0a493a0cb1f5d64e5cd9e7e4796032d986c08079573e047",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1RJQxivXURIeQ4q7J3M7RpQapmLOmbMuD",
+      "title": "Darkwing Duck (USA).nes",
+      "system": "NES",
+      "rom_sha256": "b7fff97f34d7142765685c6505ad54285cfd7e847e6943bc53e432c4f25fa49c",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1oDncUUhTgRUGblsHDgfiZWOlBTIVGevf",
+      "title": "DARKWING.NES",
+      "system": "NES",
+      "rom_sha256": "5e9dae602c0a4a27d396e2fa4e7d7f7c5a817fff38d193eca942386b3d137dd8",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1-N2MyqmUjHkO7P6IWXQ6OgcvdRReVcJR",
+      "title": "Deep Dungeon 3 - Yuushi heno Tabi (J) [T-Eng].nes",
+      "system": "NES",
+      "rom_sha256": "aaa9b9381f200ee8ef47e0c8db826103c182ae30b73c450cb45ef88cb67ebbae",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1MCJaHsGsr2C0PbXl9a4uEhMms2xnJR6G",
+      "title": "DONALDD.NES",
+      "system": "NES",
+      "rom_sha256": "9b8e14fce1072b30ee9c62a9f8f9bc64bff3423ea6876cc406494225c18977b2",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1RQWj-WsUz4dvM1EMiW6zZLO3LcpglZJN",
+      "title": "Donkey Kong (JU) [T-Span].nes",
+      "system": "NES",
+      "rom_sha256": "7df9c6a816745332987a452bca38a1787c7550267c708aa7074418f0cdf194e1",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1xpBkq45IhN5x3uSw1zWvxwYFwodWwYeU",
+      "title": "DOUBDRIB.NES",
+      "system": "NES",
+      "rom_sha256": "1a1979b98c987b6022b658d79ab6e934b1665df63c2334fd825bb3c0603a032a",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1vIhJMFyDkpzfm-X7POlOb3l5GgedR2sL",
+      "title": "DQ3.NES",
+      "system": "NES",
+      "rom_sha256": "88e2e3ff7215db815733c7c7a55e923ae7f82ffc489708aeaf5874d33198b378",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1joDwdlnRLWOQI_rB7JNCETAAyjOvnZ-c",
+      "title": "Dr. Mario (Japan, USA) (Rev 1).nes",
+      "system": "NES",
+      "rom_sha256": "479059e174013a743a4b319cc5b39d8b1fe452e303e2655af6a58bf86a4e8219",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1k_jojL64ws4BrD7464xpVQUqCoRjqny5",
+      "title": "Dragon Ball - Shen Long no Nazo (J) [hM34][T+Eng1.11_TransBRC].nes",
+      "system": "NES",
+      "rom_sha256": "73f4b2281b01afd2cfcfd0442ee339a4ac29136ef38d24431cba50d71522324e",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1pX9zwcaJMbUZ6tsxOiV9qrivs3sNwYND",
+      "title": "Dragon Ball 3 - Gokuu Den (J) [T+Eng0.15_Dodgy].nes",
+      "system": "NES",
+      "rom_sha256": "dd278a052bae4074c71e8fd69b793d9ed8fec0b4b39795dc04410c0009ecf7cd",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1k4IAcNqlAGPk-M5hDFot8AqbOGPrMWE4",
+      "title": "Dragon Ball Z - Kyoushuu! Saiya Jin (J) [T-Eng].nes",
+      "system": "NES",
+      "rom_sha256": "3edb111c4cc355761b4fc74b24d435530eca5a5260d0393679cde6bfef816b03",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "15jw6CtXQCuMlzIU-LPJfoyQEqoNeF00Y",
+      "title": "Dragon Ball Z - Kyoushuu! Saiya Jin (J) [T-Eng1.1].nes",
+      "system": "NES",
+      "rom_sha256": "8415062c6b2da8c9e24f92d5508ec532d59fe7ab2ad7ac87249d94915bdce4a5",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1SEiuZwzwryKJeD4KZyvzUm__tCu7xntt",
+      "title": "Dragon Ball Z - Kyoushuu! Saiya Jin (J) [T+Eng1.1].nes",
+      "system": "NES",
+      "rom_sha256": "8415062c6b2da8c9e24f92d5508ec532d59fe7ab2ad7ac87249d94915bdce4a5",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1cRG2BI7cIb8SoHX72aKnOs5C7rWlLp7E",
+      "title": "Dragon Ball Z Gaiden - Saiya Jin Zetsumetsu Keikaku (J) [T+Eng0.05_Saiya].nes",
+      "system": "NES",
+      "rom_sha256": "e2d7af7b611741195f7719da6413f651fe6fb89c9dee3ea3dcab957b8e2f9f3c",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1t35f1TFjpOSDl-TVSXkwHckv6C1FnupE",
+      "title": "Dragon Ball Z II - Gekishin Freeza!! (J) [T+Eng0.70_Saiya].nes",
+      "system": "NES",
+      "rom_sha256": "cf2e3e3fe00da7032ffda1cdd7208738b3dada0b0458993654b58557ae104ed8",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1WXmuF40SvzKMfW6qxFpVno8B06wXYH-g",
+      "title": "Dragon Ball Z III - Ressen Jinzou Ningen (J) [T+Eng].nes",
+      "system": "NES",
+      "rom_sha256": "2049700049866e53555e137293033f0707a36c55754daadaee7cb334bf76a130",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1oyVOH0LxoS_FAALKPHMZMa70nH9tyNbB",
+      "title": "Dragon Quest 2 (J) [h1].nes",
+      "system": "NES",
+      "rom_sha256": "a608666ee1056a1067c39ad2b09467b1a22ac8602690894bf7ce7954bf988e12",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "12NgaiBLzV6hdWlj879-HjT3iEDP56M11",
+      "title": "Dragon Quest 3 (J) [hM02].nes",
+      "system": "NES",
+      "rom_sha256": "cd0ef63e62332c2494639e6efc880edf100f8b8daa95b922555ba6a947d6a7eb",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1w7z4MI-pQJiSLjbsmNHSD7Xfk4G84Ucl",
+      "title": "Dragon Quest IV (Unl).nes",
+      "system": "NES",
+      "rom_sha256": "bfd302cf6dd1e66ceab8724afa82127860c012b256d94813704193d3ed0d1fce",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "11Zh2owzOAh5DNOxUQMkZYgrcE-w_kTcb",
+      "title": "Dragon Warrior IV (USA).nes",
+      "system": "NES",
+      "rom_sha256": "cd97a75a89557c663c8994ae7af255e1886d4038fc657c543b4bdb7a9c1ec9f5",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1ZzSTzeZ9dcXvv39vNaOSi2QsYJMf8-JC",
+      "title": "DRAGONQ1.NES",
+      "system": "NES",
+      "rom_sha256": "09fffca76472bffe64ae76d4c72b849332ef014281a372b4fc3948ef47d1aad6",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1OYlVINM4zONXlFdE9iDW8CFxsmXzY84l",
+      "title": "Dragonwarrior.nes",
+      "system": "NES",
+      "rom_sha256": "f61d66869215033dd1760b862026414595e8af5e8b1ad732e041c3a4bbd8facd",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1ETCKylIoq9bXc-swsEbjoHsXECkE0BIh",
+      "title": "DTALES1.NES",
+      "system": "NES",
+      "rom_sha256": "97d472f7b2c1088448d1644155b2650a546bad887b3cba571e16d7986824c169",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "15ETWVe4rirjgmZtUc8FShshJIFI8b2Wk",
+      "title": "Duck Tales 2 (U).nes",
+      "system": "NES",
+      "rom_sha256": "c842683db5bd5a21bfc796903a733f4772a612709d10e9c880e76159963bddda",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1DUVguUM8KVzWFiLZuVeG1sbGjBykMgWn",
+      "title": "DuckTales (USA).nes",
+      "system": "NES",
+      "rom_sha256": "c7419d5c1b4a78ff427e8d7beac13f9b006f813aec56092a92485e1185283367",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1Mq8JP3-yljxwf8in16kF2PFS3h8V5Wpa",
+      "title": "DuckTales 2 (USA).nes",
+      "system": "NES",
+      "rom_sha256": "6400b8dedbb6273f5ea01b68c61453f7cf5cab64ea2a0f57d4d31dd4b983187b",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1FjFefGgaVxcmCIbDf2Zp5MDCD_5Ut3wj",
+      "title": "Felix the Cat (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "0a20d72e1addcf10f9d32966ee6c6efc4a123a4e37d409fe4c315b446c963b3b",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1pWh98BTiBt5M7PcDO1QezdPbMSO-uteF",
+      "title": "Final Fantasy (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "d360beeee19a69d1c92d02292167c57f2d3ca8405b79101fc8c2f39dea549667",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1t8vhnsF0lEcmBRF_xsaXgYIP1PUCUiwG",
+      "title": "Final Fantasy 3 (J) [T-Eng1.1].nes",
+      "system": "NES",
+      "rom_sha256": "b9ed94075219e8afc49233e5aa9313863c7bf65e5e8e46c025f085c7234b80d4",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1t4ZcPjX6mfIMSYd1PxwuGX3xS6EhdLw4",
+      "title": "Final Fantasy II (U) (Prototype).nes",
+      "system": "NES",
+      "rom_sha256": "79e4aba894efe6e8fff5d8bff8faf0e48c4b01cce82b685dd24b22b91c8a0357",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1dBDxbCFEN4Ub0KQ8VUaySjxCHfl6G9lO",
+      "title": "Final Fantasy III (J) [T-Eng].nes",
+      "system": "NES",
+      "rom_sha256": "e890834c1cbe963bf4d3954fcde461b2fcb8814a0927e4a5676ff1a5fb80f7a3",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1cLyS5fKXGm8rUJwYvdv7UrD3GK44LJL5",
+      "title": "Final Fantasy V (Unl).nes",
+      "system": "NES",
+      "rom_sha256": "5989590792eff5c0ed2a9a31b18026e1993cb6d301949c54deaa37b48dc399f0",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1w_ZfmVSGEn2UNOV6c1fqY2XjOJG8xpo8",
+      "title": "Final Fight 3 (Unl) [!].nes",
+      "system": "NES",
+      "rom_sha256": "c5d84f046f4da3f77d6ec537fd7b68e9752338a217911cfbb967604c1be8c390",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "11BZqt4Cjq_7ynUM73Z1tyzkhf__xnW-e",
+      "title": "Fire Emblem Gaiden (J) [hM04][T-Eng].nes",
+      "system": "NES",
+      "rom_sha256": "71436c4008d2278eb6d829af18821be2744a0dfb63ff0d74c6aeaf80a07ee91b",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1DQmkAlF4oP2QdBlSYF6Kc8CcYuB3XOvn",
+      "title": "Flintstones 2 - The Surprise at Dinosaur Peak!, The (U).nes",
+      "system": "NES",
+      "rom_sha256": "707f6affd38d066519b3b81de27277980fba053e100d17e6485ab092f9da7189",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1EcAtYE27SZhju1JqpRNpWuPbeBJMO-Wn",
+      "title": "GALAXIAN.NES",
+      "system": "NES",
+      "rom_sha256": "525e5345d5539fce588df011a47bb76cb72192c6ddf713c71c838fb60e78125d",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1FvtNGZaBaiub2fZxLdO1GrKd98Anw0Jt",
+      "title": "Juvei Quest (J) [hFFE].nes",
+      "system": "NES",
+      "rom_sha256": "b4a652772e2cf9c962cd40391128cf5cccd752b082fb5b1a5c110321ff7fa783",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1sDRtHHlcg09ikqjiQaUmDrlOeT5OnqVK",
+      "title": "King of Fighters 99.nes",
+      "system": "NES",
+      "rom_sha256": "83f4720296265365e7d8229b25a321119f96028fed0c28d194f90bd2130fd884",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1hVIwxMAFRnsEb_OKtWN5_GyygPsE98Ef",
+      "title": "Legend of Zelda, The (USA) (Rev 1).nes",
+      "system": "NES",
+      "rom_sha256": "89232edf4f9b52e3cb872094bc78973de080befca2ddea893b6e936066514d4e",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1FkkcqzDq1dQcsJHGMzwDqMbA9HK-0MO9",
+      "title": "Lunar Pool (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "6da37fd34e8f4eb3df34e9f446726a193db77d0e0bba32aa328ef225993fc8a1",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1lAgQrNPh7PNn30mmmm6iu8MjSWHWBAt_",
+      "title": "Mario Bros. (World).nes",
+      "system": "NES",
+      "rom_sha256": "e56643baf429c03bc0577129bd9a459647ded725bddf06ff53139fd3fcf0171c",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1vYbRu1KA-D6RSuAoVwOPDZ04E0cFHyH5",
+      "title": "Mario is Missing! (USA).nes",
+      "system": "NES",
+      "rom_sha256": "0c467bbf0742f2a36da0c9d0857be7a8c0de8624511c335b0352266a5b39857f",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1bSDZxxL8ZPuSBNQwCBliUUUAoFdRFNJq",
+      "title": "Mickey Mousecapade (USA).nes",
+      "system": "NES",
+      "rom_sha256": "50e580bb32463df4579885a79e242bb830a6d0e7561f5318b73f5c26cea489c8",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1quXUUiKETAsNQW6tGGX8ox5YhKJH98-4",
+      "title": "Moon Crystal (J) [T-Eng1.0].nes",
+      "system": "NES",
+      "rom_sha256": "8105819eeeeefcd2bc1d963ec0e64250938f3b6f66ab7af65303532a10666d99",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1McAwJYVAGe2qGI-7xx_ZSssvSVoL1OcH",
+      "title": "Mortal Kombat 4.nes",
+      "system": "NES",
+      "rom_sha256": "fd680ab5e41c3faf99199ceaf541849fe3368dd03a85fb6b2c1f3a5356f244ef",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1yZcWljDDHkI7VHfYFgQnlbHvXjHXkOLW",
+      "title": "Mortal Kombat Trilogy [!].nes",
+      "system": "NES",
+      "rom_sha256": "6e0d0134321ba6cd9c2422c76aaf0e6c5419359a1c808e9a04437207b17d31b0",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1L8KlYe5eIeS9BhEdJgNHIzkArOWQAQeM",
+      "title": "NARC.NES",
+      "system": "NES",
+      "rom_sha256": "721be1420476d69359f0695b92cb998add9b7e09d765e322c9660e20d9e3609b",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "11KUufS6ZWNhKGMuawvJv7kQJNFcOcqvj",
+      "title": "Parodius da! (J) [hFFE][p1].nes",
+      "system": "NES",
+      "rom_sha256": "04cfc955c37e278088a93a22fdd65cb1be51cae43c9e4aea5987d5ea5e94785f",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1t1Cn957ugj7B2bGUeqPfHyTjaBoHu3_X",
+      "title": "Pinball (Japan, USA).nes",
+      "system": "NES",
+      "rom_sha256": "451a201c067bbabad8d762c3fdc2a83cb0b93f26ed0c350cf23bbf486f7addb6",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1hZ_Tr33JKHnvNeSRC72Chu2OFa3qshzD",
+      "title": "POOYAN.NES",
+      "system": "NES",
+      "rom_sha256": "35b5411aa4d2b3b8c234b329163f9ef2ce6f9f4732e03699b7fa376d543d3acc",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1Hl8gp_r6o131676tMdWh6l_6VbzOwx8N",
+      "title": "Popeye (World) (Rev 1).nes",
+      "system": "NES",
+      "rom_sha256": "0016065132a2dc98afb1181a735edcb9c656b0b89af4e0771e94807ba67bd8b4",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1yUsGiRWMGg1QMS85dOonRa6iNRrS4mAK",
+      "title": "Race America (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "210ebd9ddf4134926301ebf539ee20abc805255cd681747f3f73abfe831e2dd3",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1cXDR_6YbO4WXbapXi3hZjm2veBKOWGrv",
+      "title": "Racket Attack (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "52cf4adac5cfa3f3b1091838947151e338a3f9a48577a4e03eb1829fc1291302",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "18z7sK1EaZD_MonrlhqSGzYETTCI7jZ1A",
+      "title": "Rambo (USA) (Rev 1).nes",
+      "system": "NES",
+      "rom_sha256": "1c621c11761c56b1167ed3302f2a2bb8e4f0d64742d11cf539447eae2199a1ab",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1n50xsXHiIMFoGhKyZzsvVZpEyewM6xFJ",
+      "title": "RoadRunr.nes",
+      "system": "NES",
+      "rom_sha256": "919d2ec966b8c2f66a68406b0593187ba5eb0c95736db55928ddd19a414db051",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1C5lZa24FIXP3HbZhYAmZ708sMpV-Wfhd",
+      "title": "SD Gundam Gaiden - Knight Gundam Monogatari (J) [T+Eng0.10_Assassin_Productions].nes",
+      "system": "NES",
+      "rom_sha256": "65f17e1df41bb5ea91c0a16441581a6015db016e8ca4497389bc23ae25d3457b",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1e8eZSBV5hdyTRT6KDke_qugnO1O73Ny2",
+      "title": "Somari.nes",
+      "system": "NES",
+      "rom_sha256": "650164aa179ae141bfe2f3a5dca79cc665d55fac80b17155a2211ff6a896b265",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1MuFFxlcn54KlHdD6rAY6hmS04ToVt1Yw",
+      "title": "Spider-Man - Return of the Sinister Six (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "61c24c7d40cb0dec53326372c4d286f8af721d71a13c10b27b80241353242042",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1yeGUxDGRasllPUrj7GRHK0HQrknmAO7T",
+      "title": "Spider-Man - Return of the Sinister Six (USA).nes",
+      "system": "NES",
+      "rom_sha256": "61c24c7d40cb0dec53326372c4d286f8af721d71a13c10b27b80241353242042",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1CGrsnf_-GV2bgqg-IvCHSZYzR2IcxNX-",
+      "title": "SQOON.NES",
+      "system": "NES",
+      "rom_sha256": "138b2096e5548e8d2d8c9c053f62f9c4c9c4fa3c6541d4ce9c7cf06152e55e58",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1K4-U3fH8U5lcjTLCBwtfyCcoBa-FZVLd",
+      "title": "Study and Game 32-in-1 [!].nes",
+      "system": "NES",
+      "rom_sha256": "e5ab1b1149c2db0558c4ca9ff9a847d0bb80e2df8f71f2ac94c69202f5fa8a70",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1oP8nw40YlnT5WmS_Gew93b8p7gQgFlIV",
+      "title": "Super Mario Bros 2000 (SMB1 Hack).nes",
+      "system": "NES",
+      "rom_sha256": "23237794c10193b17c854f17b5d8f01c002e29aa5b12220b7524b1218b6b0439",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1Uwq1lLxeSDCGpOv85QsbmE7m1CpesMfg",
+      "title": "Super Mario Bros. + Duck Hunt (USA).nes",
+      "system": "NES",
+      "rom_sha256": "23ec3f6bb68f8774070ce936869e7f62ac3490449f58e62d6ed33a0fb385d456",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1TiITzVFJA_q6eCd-ejTffubR4gQL21tu",
+      "title": "Super Mario Bros. 2 (USA) (Rev 1).nes",
+      "system": "NES",
+      "rom_sha256": "6ca47e9da206914730895e45fef4f7393e59772c1c80e9b9befc1a01d7ecf724",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf",
+      "title": "Super Mario Bros. 3 (USA) (Rev 1).nes",
+      "system": "NES",
+      "rom_sha256": "4377a7f5e6eb50bdd2ac6f249bf1a7085500aca8eb41f38545c3a2731c51a579",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT",
+      "title": "Super Mario World (U) [!].smc",
+      "system": "SNES",
+      "rom_sha256": "d70c9c7716ad12c674fc7dd744736aa48d4d7b4237f58066be620fda26024872",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1CTxYst8-amJn4CbQSHkw-k-25ttI2X69",
+      "title": "Tecmo Cup - Soccer Game (U) [!].nes",
+      "system": "NES",
+      "rom_sha256": "a8f1547feb640c1e4dfef299da8c70e441783f0d50a40ee7dedaf722d3f83e9a",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1uMzCoytb7mywnCCu0Kqx0nobx2cWn-wp",
+      "title": "Teenage Mutant Hero Turtles 2 (E) [!].nes",
+      "system": "NES",
+      "rom_sha256": "06060c579a98e47399eaaf71a5c5feed5af37747bb972ae9031ea017a4be18b2",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1MXH_GZLIF6OrQImupaw_dSSHZxcuQ4ml",
+      "title": "Teenage Mutant Ninja Turtles (USA).nes",
+      "system": "NES",
+      "rom_sha256": "dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1TjdLqXK8EsgT-brL1uWY2sgnVm85-bWb",
+      "title": "Teenage Mutant Ninja Turtles - Tournament Fighters (USA).nes",
+      "system": "NES",
+      "rom_sha256": "b70ba5149d731333c86521f519eac23c9e904ebf475ed436995e3d91a910698f",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1Y-8mJ_uUmhV4bROqlUaGDyx_p-0ybZ9d",
+      "title": "Teenage Mutant Ninja Turtles 3 (U).nes",
+      "system": "NES",
+      "rom_sha256": "8f4a42800c911214f4f9ffb42579dade607ee7e489a1c8c77d3b97395a7629ec",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "19l8eH21fGVeMNB_zgEU5cjlm-0MGmGHI",
+      "title": "Teenage Mutant Ninja Turtles II - The Arcade Game (USA).nes",
+      "system": "NES",
+      "rom_sha256": "637fa9d773cb39fcd4e55faf46bc53f82ac9d7706f8473adeb06e2b9e95c2414",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1RZYLszH-IJ0lmdMt2X2gMMKPyU0jZnHx",
+      "title": "Teenage Mutant Ninja Turtles III - The Manhattan Project (USA).nes",
+      "system": "NES",
+      "rom_sha256": "d6dc27e16afd5d2ad151c0d593908aff9e59c9f710d2c559d5f13c856350560e",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1qZ-eS-GZ5nQkmVAtwhnAOpE-3GM_E9g3",
+      "title": "Tiny Toon Adventures 2 - Trouble in Wackyland (USA).nes",
+      "system": "NES",
+      "rom_sha256": "116474caec50c47176fa5c729f5458a5afa0c35e85398a7a198a0da46e7c9319",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1O-8oJEcvX3jwvO35kHvI7tEfGt9EpIdI",
+      "title": "Tom & Jerry (and Tuffy) (U).nes",
+      "system": "NES",
+      "rom_sha256": "9557237573db52cf71aa871d39fc01b6144bac1e283f0c9f132dcf4da1eaf610",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1NsnW4ALsdfD7-PrZruG_ykA1oZf-k_90",
+      "title": "Tom & Jerry - The Ultimate Game of Cat and Mouse! (USA).nes",
+      "system": "NES",
+      "rom_sha256": "9557237573db52cf71aa871d39fc01b6144bac1e283f0c9f132dcf4da1eaf610",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1Sezd23PDTDa1ctChnX6vTI2bpTUo0GHk",
+      "title": "Ultimate League Soccer (Unl) [!p].nes",
+      "system": "NES",
+      "rom_sha256": "cea89e4023542b77eb5700ca471b5053cfe01de7bfe84940541de05ee979b138",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1K0NoU_fZHTW0-K2HuMKlS2ik6rSRsOz4",
+      "title": "Wario's Woods (USA).nes",
+      "system": "NES",
+      "rom_sha256": "c9e1a9f6f92daa6acab933a13308e7c169db10c543febc2f59836c8f8a8ac33d",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1RSWHktdlI29CeEjvLP6sb-P5Q1ph0jLN",
+      "title": "Ys (J) [T+EngR1_DMullen].nes",
+      "system": "NES",
+      "rom_sha256": "243652acfba46ad2f548d2a03aadc9b01c8858ed162562ca1c3080c8e39c647a",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1lB3RH9ZCTGV32d_GMgN7HhqO9LZhLcXO",
+      "title": "Ys II - Ancient Ys Vanished - The Final Chapter (J) [T+EngR1_DMullen].nes",
+      "system": "NES",
+      "rom_sha256": "43e2403f5297655e6fceeb5f6aec679afceb9621260fb7c4cbdd71eff7bd9e78",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    },
+    {
+      "source_id": "1ePN2PAC2YfAdGB8VsB3uIwQXvUVvJlhu",
+      "title": "Zelda II - The Adventure of Link (USA).nes",
+      "system": "NES",
+      "rom_sha256": "ad8c0fbcf092bf84b48e69fd3964eea4ed91bfe62abc352943d537979782680c",
+      "verified_cheats": [],
+      "verified_stage_select": []
+    }
+  ]
+}
