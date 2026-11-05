@@ -120,7 +120,7 @@ def wait_log(tag,text):
 def click(text):
  for _ in range(8):
   adb('shell','uiautomator','dump','/sdcard/akg-slot.xml');root=ET.fromstring(adb('exec-out','cat','/sdcard/akg-slot.xml'))
-  node=next((n for n in root.iter('node') if n.get('text')==text),None)
+  node=next((n for n in root.iter('node') if n.get('text','').casefold()==text.casefold()),None)
   if node is not None:
    b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',node.get('bounds',''))
    if b:
@@ -148,13 +148,13 @@ def wait(tag,text):
 def click(text):
  for _ in range(8):
   adb('shell','uiautomator','dump','/sdcard/akg-cheat.xml');root=ET.fromstring(adb('exec-out','cat','/sdcard/akg-cheat.xml'))
-  node=next((n for n in root.iter('node') if n.get('text')==text),None)
+  node=next((n for n in root.iter('node') if n.get('text','').casefold()==text.casefold()),None)
   if node is not None:
    b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',node.get('bounds',''))
    if b:
     x1,y1,x2,y2=map(int,b.groups());adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2));return
   time.sleep(.5)
- raise RuntimeError('UI option missing: '+text)
+ raise RuntimeError('UI option missing: '+text+'; visible='+repr([n.get('text','') for n in root.iter('node') if n.get('text')]))
 wait('AKG_ANDROID','PLAYER_READY')
 adb('shell','input','tap','640','50');click('Cheats');click('Lives counter 99 (memory tested)');click('Apply');wait('AKG_ANDROID_CHEAT','SMW cheat enforced')
 adb('logcat','-c')
