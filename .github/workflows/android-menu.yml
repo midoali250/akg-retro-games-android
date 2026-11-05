@@ -1,0 +1,31 @@
+name: Android menu preview checks
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'gradle/**', 'gradlew', 'settings.gradle', 'build.gradle', 'gradle.properties', '.github/workflows/android-menu.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify assets and catalog
+        run: |
+          cmp drive-index.json app/src/main/assets/drive-index.json
+          cmp NOTICE.md app/src/main/assets/NOTICE.md
+          python3 -c "import json; d=json.load(open('drive-index.json')); assert len(d['files'])==98 and len(d['excluded_ids'])==1"
+      - name: Build non-playable debug menu preview
+        run: ./gradlew :app:assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-menu-preview-not-playable
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7

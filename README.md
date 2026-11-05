@@ -1,7 +1,5 @@
-# Retro Collection — android
+# Retro Collection — Android preview
 
-PRIVATE, INCOMPLETE FOUNDATION. This repository contains the selected menu concept, an original icon, and tested update-manifest validation helpers. It does not yet contain a playable frontend, ROMs, signing keys, a published update feed, release packages, verified cheats, or stage selection. The menu image is a mockup and its titles are illustrative.
+PRIVATE, INCOMPLETE: this contains a non-playable Android menu preview, artwork, the user-supplied game index and attribution. It does not load or run games, implement touch gameplay controls, save states, cheats, stage selection, or provide update delivery. The debug APK is for UI development only and is not a player release.
 
-Future updates are intended to use an externally hosted distribution service; no developer token may be embedded in the client. SHA-256 alone does not authenticate a catalog: a trusted signed manifest or equivalent trust mechanism is still required before shipping. Android package signing is separate from update metadata signing.
-
-Developer attribution and disclaimer: [NOTICE.md](NOTICE.md). Platform icon assets are in `assets/platform-icons/`; application integration is not yet implemented.
+The icon and notice are built into the preview. The original user-provided ROMs remain at their source and are not included in this preview. Release signing and an externally hosted update service are still required.
