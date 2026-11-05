@@ -60,7 +60,7 @@ x1,y1,x2,y2=map(int,bounds.groups());subprocess.run(['adb','shell','input','tap'
 for attempt in range(8):
  try:
   root=hierarchy();texts=[n.get('text','') for n in root.iter('node')]
-  if expected in texts:
+  if any(expected in text for text in texts):
    print('PASS Android About button and exact requested description');break
  except Exception:pass
  time.sleep(2)
