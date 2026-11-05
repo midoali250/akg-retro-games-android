@@ -1,0 +1,52 @@
+name: Bootstrap Android release signing identity
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [create, verify]
+        required: true
+      repository_key:
+        required: false
+      repository_key_id:
+        required: false
+      backup_key:
+        required: false
+      backup_key_id:
+        required: false
+      expected_fingerprint:
+        required: false
+permissions:
+  contents: read
+jobs:
+  key:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install PyNaCl==1.5.0
+      - name: Generate encrypted identity or verify stored identity
+        env:
+          MODE: ${{ inputs.mode }}
+          REPO_KEY: ${{ inputs.repository_key }}
+          REPO_KEY_ID: ${{ inputs.repository_key_id }}
+          BACKUP_KEY: ${{ inputs.backup_key }}
+          BACKUP_KEY_ID: ${{ inputs.backup_key_id }}
+          EXPECTED_FINGERPRINT: ${{ inputs.expected_fingerprint }}
+          SIGNING_JSON: ${{ secrets.AKG_ANDROID_RELEASE_SIGNING_JSON }}
+        run: python scripts/bootstrap_apk_signing.py
+      - name: Upload only encrypted signing identity
+        if: inputs.mode == 'create'
+        uses: actions/upload-artifact@v4
+        with:
+          name: encrypted-apk-signing
+          path: encrypted-apk-signing.json
+          retention-days: 1
+          if-no-files-found: error
