@@ -29,6 +29,7 @@ import java.util.Locale;
 public final class MainActivity extends Activity {
     private static final int BG=Color.rgb(9,16,41), FG=Color.rgb(224,235,250), MUTED=Color.rgb(158,183,216), ACCENT=Color.rgb(96,225,235);
     private final ArrayList<Game> games=new ArrayList<>();
+    private UpdateClient updates;
     private GridLayout grid; private TextView count; private String category="ALL",query="";
     static final class Game { final String id,title,system; Game(String i,String t,String s){id=i;title=t;system=s;} }
     private int dp(int x){return Math.round(x*getResources().getDisplayMetrics().density);}
@@ -36,6 +37,10 @@ public final class MainActivity extends Activity {
     private TextView label(String s,int size,int color){TextView t=new TextView(this);t.setText(s);t.setTextSize(size);t.setTextColor(color);return t;}
     private String asset(String name) throws Exception {try(InputStream in=getAssets().open(name);ByteArrayOutputStream out=new ByteArrayOutputStream()){byte[] b=new byte[4096];int n;while((n=in.read(b))!=-1)out.write(b,0,n);return out.toString(StandardCharsets.UTF_8.name());}}
     @Override public void onCreate(Bundle state){super.onCreate(state);getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        if(getIntent().getBooleanExtra("akg_update_ci_self_test",false)){
+            try{UpdateSecurity.selfTest();android.util.Log.i("AKG_UPDATE_TEST","PASS signature, tampering and version checks");}catch(Exception|AssertionError error){android.util.Log.e("AKG_UPDATE_TEST","FAIL update self test",error);}finish();return;
+        }
+        updates=new UpdateClient(this);
         if(getIntent().getBooleanExtra("akg_ci_smoke",false)){
             android.content.Intent intent=new android.content.Intent(this,PlayerActivity.class);intent.putExtra("game_id",getIntent().getStringExtra("game_id"));intent.putExtra("akg_ci_smoke",true);startActivity(intent);finish();return;
         }
@@ -47,7 +52,7 @@ public final class MainActivity extends Activity {
     }
     private Button button(String text){Button b=new Button(this);b.setText(text);b.setAllCaps(false);b.setTextColor(FG);b.setTextSize(12);b.setBackground(box(Color.rgb(28,43,76),Color.rgb(56,79,113)));return b;}
     private void build(){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(dp(20),dp(10),dp(20),dp(6));try {android.graphics.Bitmap bg=android.graphics.BitmapFactory.decodeStream(getAssets().open("menu-background.png")); root.setBackground(new android.graphics.drawable.BitmapDrawable(getResources(),bg));} catch(Exception e) {root.setBackground(new GradientDrawable(GradientDrawable.Orientation.TL_BR,new int[]{BG,Color.rgb(26,19,63)}));}
-        LinearLayout header=new LinearLayout(this);header.setGravity(Gravity.CENTER_VERTICAL);TextView title=label("AKG RETRO GAMES",22,FG);title.setTypeface(null,Typeface.BOLD);header.addView(title,new LinearLayout.LayoutParams(0,-2,1));Button about=button("About");about.setOnClickListener(v->showAbout());header.addView(about,new LinearLayout.LayoutParams(dp(96),dp(42)));root.addView(header);
+        LinearLayout header=new LinearLayout(this);header.setGravity(Gravity.CENTER_VERTICAL);TextView title=label("AKG RETRO GAMES",22,FG);title.setTypeface(null,Typeface.BOLD);header.addView(title,new LinearLayout.LayoutParams(0,-2,1));Button update=button("Updates");update.setOnClickListener(v->updates.check());header.addView(update,new LinearLayout.LayoutParams(dp(96),dp(42)));Button about=button("About");about.setOnClickListener(v->showAbout());header.addView(about,new LinearLayout.LayoutParams(dp(96),dp(42)));root.addView(header);
         TextView note=label("EXPERIMENTAL PLAYER — CONTROLS AND GAMES UNDER TEST",11,Color.rgb(246,183,104));root.addView(note);
         LinearLayout controls=new LinearLayout(this);controls.setGravity(Gravity.CENTER_VERTICAL);
         for(String c:new String[]{"ALL"}){Button b=button(c);LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(dp(76),dp(40));bp.setMargins(0,dp(6),dp(5),dp(6));controls.addView(b,bp);b.setOnClickListener(v->{category=c;render();});}
@@ -57,6 +62,7 @@ public final class MainActivity extends Activity {
         for(Game g:games){if(!category.equals("ALL")&&!category.equals(g.system))continue;if(!g.title.toLowerCase(Locale.ROOT).contains(query))continue;shown++;
             LinearLayout card=new LinearLayout(this);card.setOrientation(LinearLayout.VERTICAL);card.setPadding(dp(10),dp(10),dp(10),dp(10));card.setBackground(box(Color.rgb(22,37,66),Color.rgb(62,96,132)));TextView sys=label(g.system,11,ACCENT);card.addView(sys);TextView text=label(g.title,14,FG);text.setMaxLines(2);card.addView(text);card.setOnClickListener(v->{android.content.Intent intent=new android.content.Intent(this,PlayerActivity.class);intent.putExtra("game_id",g.id);startActivity(intent);});GridLayout.LayoutParams p=new GridLayout.LayoutParams();p.width=width;p.height=dp(76);p.setMargins(dp(3),dp(3),dp(3),dp(3));grid.addView(card,p);}
         count.setText(shown+" games  •  developer and disclaimer: About");}
+    @Override protected void onActivityResult(int request,int result,android.content.Intent data){super.onActivityResult(request,result,data);if(updates!=null)updates.onActivityResult(request);}
     private void showAbout(){String description="This application has been developed by Ahmed Kamal Elgandy to serve as a digital archive and platform for running and optimizing classic retro and Atari-style games on mobile devices. The project aims to revive memories and preserve the software heritage of classic games with a smooth, lightweight experience, while fully respecting the intellectual property rights of the original production companies.";
         String notice;try{notice=asset("NOTICE.md");}catch(Exception e){notice="Notice unavailable";}
         android.text.SpannableString message=new android.text.SpannableString(description+"\n\n"+notice);int start=description.indexOf("Ahmed Kamal Elgandy");message.setSpan(new android.text.style.StyleSpan(Typeface.BOLD),start,start+"Ahmed Kamal Elgandy".length(),android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

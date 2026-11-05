@@ -161,3 +161,15 @@ adb('logcat','-c')
 adb('shell','input','tap','640','50');click('Cheats');click('Lives counter 99 (memory tested)');click('Apply');wait('AKG_ANDROID_CHEAT','SMW cheat disabled')
 print('PASS Android SNES exact-ROM cheat memory enforcement and reset')
 PY
+
+# Validate production verifier using a non-secret test key, including tampering and rollback rejection.
+adb shell am force-stop "$PKG"
+adb logcat -c
+adb shell am start -n "$PKG/$ACT" --ez akg_update_ci_self_test true
+for i in $(seq 1 20); do
+  if adb logcat -d -s AKG_UPDATE_TEST:I | grep -q 'PASS signature, tampering and version checks'; then break; fi
+  if adb logcat -d -s AKG_UPDATE_TEST:E | grep -q 'FAIL update self test'; then adb logcat -d -s AKG_UPDATE_TEST:E; exit 1; fi
+  sleep 1
+done
+adb logcat -d -s AKG_UPDATE_TEST:I | grep 'PASS signature, tampering and version checks'
+echo 'PASS Android signed update verification self-test'

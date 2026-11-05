@@ -16,3 +16,5 @@ android {
     packagingOptions { jniLibs { useLegacyPackaging true } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
 }
+
+dependencies { implementation 'net.i2p.crypto:eddsa:0.3.0' }
