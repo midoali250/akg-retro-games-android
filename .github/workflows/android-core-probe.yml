@@ -1,0 +1,59 @@
+name: Android native core ABI probes
+on:
+  push:
+    branches: [main]
+    paths: ['engine-reference.json', '.github/workflows/android-core-probe.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - abi: arm64-v8a
+            triple: aarch64-linux-android
+          - abi: x86_64
+            triple: x86_64-linux-android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: android-actions/setup-android@v3
+      - name: Install pinned Android NDK
+        run: sdkmanager 'ndk;27.2.12479018'
+      - name: Build engine registry cores for Android
+        shell: bash
+        env:
+          ABI: ${{ matrix.abi }}
+          TRIPLE: ${{ matrix.triple }}
+        run: |
+          export TOOLCHAIN="$ANDROID_SDK_ROOT/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 - <<'PYCODE'
+          import json,os,subprocess,urllib.request,pathlib,shutil
+          ref=json.load(open('engine-reference.json'))
+          with urllib.request.urlopen('https://raw.githubusercontent.com/midoali250/bitvault-engine/'+ref['commit']+'/'+ref['registry'],timeout=30) as r:registry=json.load(r)
+          tool=os.environ['TOOLCHAIN'];triple=os.environ['TRIPLE'];out=pathlib.Path('android-core-probes');out.mkdir()
+          for system in ('NES','SNES'):
+              matches=[c for c in registry['cores'] if c['system']==system];assert len(matches)==1;c=matches[0];src='src-'+system
+              subprocess.run(['git','init','-q',src],check=True)
+              subprocess.run(['git','-C',src,'remote','add','origin','https://github.com/'+c['repository']+'.git'],check=True)
+              subprocess.run(['git','-C',src,'fetch','--depth=1','origin',c['revision']],check=True)
+              subprocess.run(['git','-C',src,'checkout','--detach','FETCH_HEAD'],check=True)
+              assert subprocess.check_output(['git','-C',src,'rev-parse','HEAD'],text=True).strip()==c['revision']
+              subprocess.run(['make','-C',str(pathlib.Path(src,c['make_dir'])),'-f',c['makefile'],'-j2','platform=unix','CC='+tool+'/'+triple+'24-clang','CXX='+tool+'/'+triple+'24-clang++','AR='+tool+'/llvm-ar'],check=True)
+              libs=list(pathlib.Path(src).rglob('*_libretro.so'));assert len(libs)==1,libs
+              symbols=subprocess.check_output([tool+'/llvm-readelf','-Ws',str(libs[0])],text=True)
+              for sym in ['retro_init','retro_run','retro_load_game','retro_set_environment']:assert sym in symbols,sym
+              header=subprocess.check_output([tool+'/llvm-readelf','-h',str(libs[0])],text=True)
+              assert ('AArch64' if os.environ['ABI']=='arm64-v8a' else 'X86-64') in header,header
+              shutil.copy2(libs[0],out/libs[0].name)
+              print('PASS Android ABI probe',system,os.environ['ABI'],c['revision'],flush=True)
+          PYCODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-native-core-probe-${{ matrix.abi }}
+          path: android-core-probes/*
+          if-no-files-found: error
+          retention-days: 7
