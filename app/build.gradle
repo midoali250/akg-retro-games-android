@@ -2,12 +2,17 @@ plugins { id 'com.android.application' }
 android {
     namespace 'com.bitvaultengine.retrocollection'
     compileSdk 34
+    ndkVersion '27.2.12479018'
     defaultConfig {
         applicationId 'com.bitvaultengine.retrocollection.preview'
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName '0.0.1-preview'
+        versionCode 2
+        versionName '0.0.2-player-preview'
+        ndk { abiFilters 'arm64-v8a', 'x86_64' }
+        externalNativeBuild { cmake { } }
     }
+    externalNativeBuild { cmake { path file('src/main/cpp/CMakeLists.txt'); version '3.22.1' } }
+    packagingOptions { jniLibs { useLegacyPackaging true } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
 }

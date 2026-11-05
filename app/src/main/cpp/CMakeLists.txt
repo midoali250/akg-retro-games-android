@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(akg_android_host C)
+add_library(akg_android_host SHARED libretro_bridge.c)
+target_compile_options(akg_android_host PRIVATE -Wall -Wextra)
+target_link_libraries(akg_android_host dl log)
