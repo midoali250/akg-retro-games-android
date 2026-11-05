@@ -105,6 +105,20 @@ else:raise RuntimeError('Last indexed game not visible after scrolling')
 print('PASS library count and scrolling to last indexed game')
 tap(find_text('Settings'));tap(find_text('Button mapping: classic games'));find_text('A button: A');find_text('B button: B');tap(find_text('X button: Turbo A'));tap(find_text('Turbo A'));find_text('Y button: Turbo B');tap(find_text('Done'));find_text('Move joystick and four buttons');find_text('Button size');tap(find_text('Close'))
 print('PASS main Settings exposes movement, four-button mapping, NES turbo defaults and button size')
+# Exercise the real main-menu position editor for all four buttons.
+tap(find_text('Settings'));tap(find_text('Move joystick and four buttons'))
+for _ in range(45):
+ if 'PLAYER_READY' in adb('logcat','-d','-s','AKG_ANDROID:V'):break
+ time.sleep(1)
+else:raise RuntimeError('Control layout editor did not start')
+for x1,y1,x2,y2 in [(1152,448,1150,420),(1024,512,1030,535),(1024,384,1025,355),(896,448,890,470)]:
+ adb('shell','input','swipe',str(x1),str(y1),str(x2),str(y2),'500')
+adb('shell','input','tap','640','50');find_text('Settings')
+xml=ET.fromstring(adb('shell','run-as','com.bitvaultengine.retrocollection.preview','cat','shared_prefs/controls.xml'));vals={n.get('name'):n.get('value') for n in xml}
+for i,(x,y) in enumerate([(1150,420),(1030,535),(1025,355),(890,470)],1):
+ if abs(float(vals.get('x'+str(i),'nan'))-x/1280)>.02 or abs(float(vals.get('y'+str(i),'nan'))-y/640)>.02:raise RuntimeError('Button '+str(i)+' position not saved: '+str(vals))
+print('PASS all four button positions moved and persisted from main Settings')
+tap(find_text('Settings'));tap(find_text('Reset control positions'))
 root=hierarchy();entry=next((n for n in root.iter('node') if n.get('class')=='android.widget.EditText'),None)
 if entry is None:raise RuntimeError('Search field missing')
 tap(entry);adb('shell','input','text','Zelda');find_text('2 of 97 games  •  scroll to see all');find_text('Zelda II - The Adventure of Link (USA)')
