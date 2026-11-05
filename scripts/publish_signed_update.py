@@ -31,6 +31,8 @@ if not version:
   raise SystemExit('Version code required')
  version=match.group(1)
 if not re.fullmatch(r'[1-9][0-9]{0,8}',version):raise SystemExit('Invalid version code')
+config_version=json.loads(Path('updates/version.json').read_text()).get('version_code')
+if type(config_version) is not int or config_version!=int(version):raise SystemExit('Release version does not match updates/version.json')
 def gh(*args):return subprocess.check_output(['gh',*args],text=True,timeout=180)
 release=json.loads(gh('release','view',tag,'--repo',repo,'--json','isDraft,isPrerelease,assets'))
 if release['isDraft'] or release['isPrerelease']:
