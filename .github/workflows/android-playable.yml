@@ -46,6 +46,11 @@ jobs:
           cp updates/public-key.json app/src/main/assets/updates/public-key.json
       - name: Build experimental debug APK
         run: ./gradlew :app:assembleDebug --no-daemon
+      - name: Verify APK contains the Android update public key
+        run: |
+          APK=$(find app/build/outputs/apk/debug -name '*.apk' -type f -print -quit)
+          test -n "$APK"
+          unzip -p "$APK" assets/updates/public-key.json | cmp - updates/public-key.json
       - uses: actions/upload-artifact@v4
         with:
           name: android-playable-debug-apk
