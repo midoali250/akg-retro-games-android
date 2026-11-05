@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "product": "akg-retro-games",
+  "platform": "android",
+  "package_format": "apk",
+  "channel": "stable",
+  "feed_url": null,
+  "publisher_public_key": null,
+  "status": "not-configured"
+}
