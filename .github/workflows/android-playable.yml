@@ -93,12 +93,13 @@ jobs:
         with:
           name: android-signed-upgrade-test
           path: signed-apk-test
-      - uses: actions/download-artifact@v4
-        with:
-          name: android-signed-review-apk
-          path: prior-signed-apk
-          run-id: 42019069639
-          github-token: ${{ github.token }}
+      - name: Download and verify the previous public signed APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p prior-signed-apk
+          gh release download akg-review-updater-2026-11-05 --repo "$GITHUB_REPOSITORY" --pattern '*.apk' --dir prior-signed-apk
+          echo 'ab5b309a3f1347a3b895de2203ab3465eecd7071a82bfae4b8c26f4fe5f1e447  prior-signed-apk/AKG-Retro-Games-Android-signed.apk' | sha256sum --check
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
