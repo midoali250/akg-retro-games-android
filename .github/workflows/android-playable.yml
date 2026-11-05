@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: midoali250/bitvault-engine
-          ref: 74a9a046d5b9be46e9d654f2e52c5a854a03be51
+          ref: 86a779802401b504e7fe575990b575e02c3460ee
           path: engine-source
           sparse-checkout: |
             engine/android

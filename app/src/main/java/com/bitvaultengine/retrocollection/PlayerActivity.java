@@ -47,29 +47,36 @@ public final class PlayerActivity extends Activity {
         byte[] hash=MessageDigest.getInstance("SHA-256").digest(bytes);StringBuilder b=new StringBuilder();for(byte v:hash)b.append(String.format(Locale.ROOT,"%02x",v&255));if(!sha.equals(b.toString()))throw new SecurityException("Game identity mismatch");
         File file=new File(getCacheDir(),sha+ext);try(FileOutputStream out=new FileOutputStream(file)){out.write(bytes);out.getFD().sync();}return file;}
     private void settings(){if(game==null)return;game.paused=true;
-        String[] options={"Resume","Move controls","Reset control positions","Save state manually","Load manual state","Full screen: "+(game.stretch?"stretch":"fit"),"Exit to game list"};
+        String[] options={"Resume","Move controls","Reset control positions","Save stage / position","Load stage / position","Full screen: "+(game.stretch?"stretch":"fit"),"Exit to game list"};
         new AlertDialog.Builder(this).setTitle("Game settings").setItems(options,(d,which)->{
             if(which==1){game.edit=true;Toast.makeText(this,"Drag the joystick and buttons; tap DONE to save",Toast.LENGTH_LONG).show();}
             else if(which==2){game.resetPositions();game.savePositions();}
-            else if(which==3)game.request=1;
-            else if(which==4)game.request=2;
+            else if(which==3){chooseStateSlot(true);return;}
+            else if(which==4){chooseStateSlot(false);return;}
             else if(which==5){game.stretch=!game.stretch;game.prefs.edit().putBoolean("stretch",game.stretch).apply();}
             else if(which==6){finish();return;}
             game.paused=false;
         }).setOnCancelListener(d->game.paused=false).show();}
+    private void chooseStateSlot(boolean save){
+        String[] slots={"Slot 1", "Slot 2", "Slot 3", "Slot 4"};
+        new AlertDialog.Builder(this).setTitle(save?"Save stage / position":"Load stage / position")
+            .setItems(slots,(d,index)->{game.stateSlot=index+1;game.request=save?1:2;game.paused=false;})
+            .setOnCancelListener(d->game.paused=false).show();
+    }
     @Override protected void onPause(){super.onPause();if(game!=null)game.paused=true;}
     @Override protected void onResume(){super.onResume();if(game!=null)game.paused=false;}
     @Override public void onBackPressed(){settings();}
     final class GameView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
         final SharedPreferences prefs=getSharedPreferences("controls",MODE_PRIVATE);final Paint paint=new Paint(3);final float[] px=new float[5],py=new float[5];
         final int[] ids={0,8,0,9,1};final String[] labels={"", "A","B","X","Y"};
-        volatile boolean alive=false,paused=false,edit=false,stretch=prefs.getBoolean("stretch",false);volatile int buttons=0,request=0;Thread thread;int moving=-1,stickPointer=-1;
+        volatile boolean alive=false,paused=false,edit=false,stretch=prefs.getBoolean("stretch",false);volatile int buttons=0,request=0,stateSlot=1;Thread thread;int moving=-1,stickPointer=-1;
         GameView(){super(PlayerActivity.this);getHolder().addCallback(this);setFocusable(true);resetPositions();for(int i=0;i<5;i++){px[i]=prefs.getFloat("x"+i,px[i]);py[i]=prefs.getFloat("y"+i,py[i]);}}
         void resetPositions(){px[0]=.15f;py[0]=.72f;px[1]=.90f;py[1]=.70f;px[2]=.80f;py[2]=.80f;px[3]=.80f;py[3]=.60f;px[4]=.70f;py[4]=.70f;}
         void savePositions(){SharedPreferences.Editor e=prefs.edit();for(int i=0;i<5;i++){e.putFloat("x"+i,px[i]);e.putFloat("y"+i,py[i]);}e.apply();}
         @Override public void surfaceCreated(SurfaceHolder h){if(thread==null){alive=true;thread=new Thread(this,"akg-game-thread");thread.start();}}
         @Override public void surfaceChanged(SurfaceHolder h,int f,int w,int height){}
         @Override public void surfaceDestroyed(SurfaceHolder h){alive=false;Thread t=thread;if(t!=null){try{t.join(5000);}catch(InterruptedException ex){Thread.currentThread().interrupt();}if(!t.isAlive())thread=null;}}
+        File stateFile(int slot){return new File(getFilesDir(),sha+(slot==1?".state":".slot"+slot+".state"));}
         @Override public void run(){AudioTrack audio=null;Bitmap bitmap=null;int frames=0;boolean sawAudio=false,sawVideo=false;
             try{File rom=extractRom();String coreName="NES".equals(system)?"libfceumm_libretro.so":"libsnes9x_libretro.so";File core=new File(getApplicationInfo().nativeLibraryDir,coreName);
                 if(!NativeBridge.open(core.getAbsolutePath(),rom.getAbsolutePath(),getFilesDir().getAbsolutePath()))throw new IllegalStateException("Could not open emulator core");
@@ -79,8 +86,8 @@ public final class PlayerActivity extends Activity {
                 double fps=NativeBridge.fps();long delay=(long)(1000/(fps>=20&&fps<=120?fps:60));
                 while(alive){long started=android.os.SystemClock.uptimeMillis();if(!paused&&!edit){NativeBridge.step(smoke&&frames>20&&frames<24?1<<3:buttons);frames++;int w=NativeBridge.width(),h=NativeBridge.height();int[] video=NativeBridge.video();if(video!=null&&w>0&&h>0&&video.length==w*h){sawVideo=true;if(bitmap==null||bitmap.getWidth()!=w||bitmap.getHeight()!=h){if(bitmap!=null)bitmap.recycle();bitmap=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);}bitmap.setPixels(video,0,w,0,0,w,h);}short[] pcm=NativeBridge.audio();if(pcm!=null&&pcm.length>0){sawAudio=true;if(audio!=null)audio.write(pcm,0,pcm.length,AudioTrack.WRITE_NON_BLOCKING);}
                     try {
-                    if(request==1){request=0;byte[] saved=NativeBridge.save();if(saved==null)throw new IllegalStateException("Save unavailable");File file=new File(getFilesDir(),sha+".state"),tmp=new File(getFilesDir(),sha+".state.tmp");try(FileOutputStream out=new FileOutputStream(tmp)){out.write(saved);out.getFD().sync();}if(!tmp.renameTo(file))throw new IllegalStateException("Save failed");runOnUiThread(()->Toast.makeText(PlayerActivity.this,"State saved",Toast.LENGTH_SHORT).show());}
-                    if(request==2){request=0;byte[] saved;try(FileInputStream in=new FileInputStream(new File(getFilesDir(),sha+".state"))){saved=readAll(in,100_000_000);}if(!NativeBridge.restore(saved))throw new IllegalStateException("Load failed");runOnUiThread(()->Toast.makeText(PlayerActivity.this,"State loaded",Toast.LENGTH_SHORT).show());}
+                    if(request==1){request=0;byte[] saved=NativeBridge.save();if(saved==null)throw new IllegalStateException("Save unavailable");File file=stateFile(stateSlot),tmp=new File(getFilesDir(),file.getName()+".tmp");try(FileOutputStream out=new FileOutputStream(tmp)){out.write(saved);out.getFD().sync();}if(!tmp.renameTo(file))throw new IllegalStateException("Save failed");runOnUiThread(()->Toast.makeText(PlayerActivity.this,"State saved",Toast.LENGTH_SHORT).show());}
+                    if(request==2){request=0;byte[] saved;try(FileInputStream in=new FileInputStream(stateFile(stateSlot))){saved=readAll(in,100_000_000);}if(!NativeBridge.restore(saved))throw new IllegalStateException("Load failed");runOnUiThread(()->Toast.makeText(PlayerActivity.this,"State loaded",Toast.LENGTH_SHORT).show());}
                     }catch(Exception stateError){request=0;runOnUiThread(()->Toast.makeText(PlayerActivity.this,"Save/load failed: "+stateError.getMessage(),Toast.LENGTH_LONG).show());}
                     if(smoke&&frames>=600){byte[] s=NativeBridge.save();if(!sawVideo||!sawAudio||s==null||!NativeBridge.restore(s))throw new IllegalStateException("Smoke failed");Log.i("AKG_ANDROID_SMOKE","PASS "+system+" video audio state input");alive=false;runOnUiThread(()->finish());}
                 }
