@@ -181,8 +181,10 @@ SIGNED=$(find signed-apk -name '*.apk' -type f -print -quit)
 NEXT=$(find signed-apk-test -name '*.apk' -type f -print -quit)
 test -n "$SIGNED" && test -n "$NEXT"
 adb install "$SIGNED"
-adb shell dumpsys package "$PKG" | grep -q 'versionCode=2'
+BASE_VERSION=$(python3 -c 'import json; print(json.load(open("updates/version.json"))["version_code"])')
+adb shell dumpsys package "$PKG" | grep -q "versionCode=$BASE_VERSION"
 adb install -r "$NEXT"
-adb shell dumpsys package "$PKG" | grep -q 'versionCode=3'
+NEXT_VERSION=$((BASE_VERSION + 1))
+adb shell dumpsys package "$PKG" | grep -q "versionCode=$NEXT_VERSION"
 adb shell am start -n "$PKG/$ACT"
-echo 'PASS Android APK same-certificate in-place upgrade from version 2 to 3'
+echo "PASS Android APK same-certificate in-place upgrade from version $BASE_VERSION to $NEXT_VERSION"
