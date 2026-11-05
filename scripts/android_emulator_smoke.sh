@@ -77,7 +77,7 @@ adb shell am force-stop "$PKG"
 adb logcat -c
 adb shell am start -n "$PKG/$ACT"
 python3 - <<'PYUI'
-import subprocess,time,re,xml.etree.ElementTree as ET
+import subprocess,time,re,math,xml.etree.ElementTree as ET
 
 def adb(*args):return subprocess.check_output(['adb',*args],timeout=35).decode('utf8','replace')
 def hierarchy():
@@ -116,7 +116,8 @@ for x1,y1,x2,y2 in [(1152,448,1150,420),(1024,512,1030,535),(1024,384,1025,355),
 adb('shell','input','tap','640','50');find_text('Settings')
 xml=ET.fromstring(adb('shell','run-as','com.bitvaultengine.retrocollection.preview','cat','shared_prefs/controls.xml'));vals={n.get('name'):n.get('value') for n in xml}
 for i,(x,y) in enumerate([(1150,420),(1030,535),(1025,355),(890,470)],1):
- if abs(float(vals.get('x'+str(i),'nan'))-x/1280)>.02 or abs(float(vals.get('y'+str(i),'nan'))-y/640)>.02:raise RuntimeError('Button '+str(i)+' position not saved: '+str(vals))
+ vx=float(vals.get('x'+str(i),'nan'));vy=float(vals.get('y'+str(i),'nan'))
+ if not math.isfinite(vx) or not math.isfinite(vy) or abs(vx-x/1280)>.02 or abs(vy-y/640)>.02:raise RuntimeError('Button '+str(i)+' position not saved: '+str(vals))
 print('PASS all four button positions moved and persisted from main Settings')
 tap(find_text('Settings'));tap(find_text('Reset control positions'))
 root=hierarchy();entry=next((n for n in root.iter('node') if n.get('class')=='android.widget.EditText'),None)
