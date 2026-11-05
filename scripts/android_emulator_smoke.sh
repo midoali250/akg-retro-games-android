@@ -26,7 +26,7 @@ for GAME in 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT;
   adb shell input swipe 1024 512 1024 512 220
   adb shell input swipe 1024 384 1024 384 220
   adb shell input swipe 896 448 896 448 220
-  adb shell input swipe 192 461 240 461 220
+  adb shell input swipe 50 270 115 270 220
   for i in $(seq 1 90); do
     if adb logcat -d -s AKG_ANDROID_SMOKE:I | grep -q 'PASS'; then break; fi
     if adb logcat -d -s AKG_ANDROID:E | grep -q 'Player failed'; then adb logcat -d -s AKG_ANDROID:E; exit 1; fi
@@ -245,17 +245,57 @@ done
 adb logcat -d -s AKG_ANDROID_CATALOG:I | grep 'PASS all '
 echo 'PASS all Android game files produced video and audio during startup'
 
+# Reset confirmation must preserve data on cancel and remove app data only after confirmation.
+adb shell am force-stop "$PKG"
+adb shell am start -n "$PKG/$ACT"
+python3 - <<'PYRESET'
+import subprocess,time,re,xml.etree.ElementTree as ET
+pkg='com.bitvaultengine.retrocollection.preview'
+def adb(*args):return subprocess.check_output(['adb',*args],timeout=35).decode('utf8','replace')
+def find(text):
+ for _ in range(12):
+  try:
+   adb('shell','uiautomator','dump','/sdcard/akg-reset.xml');root=ET.fromstring(adb('exec-out','cat','/sdcard/akg-reset.xml'))
+   node=next((n for n in root.iter('node') if n.get('text','').casefold()==text.casefold()),None)
+   if node is not None:return node
+  except Exception:pass
+  time.sleep(.5)
+ raise RuntimeError('Reset option not found: '+text)
+def tap(node):
+ b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',node.get('bounds',''));assert b
+ x1,y1,x2,y2=map(int,b.groups());adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2))
+state='files/4377a7f5e6eb50bdd2ac6f249bf1a7085500aca8eb41f38545c3a2731c51a579.slot2.state'
+adb('shell','run-as',pkg,'ls',state)
+tap(find('Settings'));tap(find('Reset entire app'));find('Reset entire app?');tap(find('Cancel'))
+adb('shell','run-as',pkg,'ls',state)
+print('PASS Android cancel reset preserves save data')
+tap(find('Reset entire app'));tap(find('Delete all app data'))
+for _ in range(15):
+ time.sleep(1)
+ result=subprocess.run(['adb','shell','run-as',pkg,'ls',state],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ if result.returncode!=0:break
+else:raise RuntimeError('Reset did not remove test save')
+adb('shell','am','start','-n',pkg+'/com.bitvaultengine.retrocollection.MainActivity');find('97 of 97 games  •  scroll to see all')
+print('PASS Android confirmed factory reset cleared local save and kept bundled games')
+PYRESET
+
 # A dedicated non-debug certificate must permit an in-place APK version upgrade.
 adb shell am force-stop "$PKG"
 adb uninstall "$PKG"
 PRIOR=$(find prior-signed-apk -name '*.apk' -type f -print -quit)
+PRIOR_V3=$(find prior-v3-apk -name '*.apk' -type f -print -quit)
 SIGNED=$(find signed-apk -name '*.apk' -type f -print -quit)
 NEXT=$(find signed-apk-test -name '*.apk' -type f -print -quit)
-test -n "$PRIOR" && test -n "$SIGNED" && test -n "$NEXT"
+test -n "$PRIOR" && test -n "$PRIOR_V3" && test -n "$SIGNED" && test -n "$NEXT"
 adb install "$PRIOR"
 adb shell dumpsys package "$PKG" | grep -q "versionCode=2"
 adb install -r "$SIGNED"
-echo "PASS previous public signed APK version 2 upgrades in-place to current signed APK"
+echo "PASS public signed APK version 2 upgrades in-place to current signed APK"
+adb uninstall "$PKG"
+adb install "$PRIOR_V3"
+adb shell dumpsys package "$PKG" | grep -q "versionCode=3"
+adb install -r "$SIGNED"
+echo "PASS latest public signed APK version 3 upgrades in-place to current signed APK"
 BASE_VERSION=$(python3 -c 'import json; print(json.load(open("updates/version.json"))["version_code"])')
 adb shell dumpsys package "$PKG" | grep -q "versionCode=$BASE_VERSION"
 adb install -r "$NEXT"
