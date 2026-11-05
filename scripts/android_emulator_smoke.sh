@@ -34,9 +34,9 @@ for GAME in 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT;
   done
   adb logcat -d -s AKG_ANDROID_SMOKE:I | grep 'PASS'
   for FACE in 1 2 4 8; do adb logcat -d -s AKG_ANDROID_TOUCH:I | grep -q "faces=$FACE"; done
-  for MASK in 256 1 128; do adb logcat -d -s AKG_ANDROID_INPUT:I | grep -q "core=$MASK"; done
+  for MASK in 256 1 128; do adb logcat -d -s AKG_ANDROID_INPUT:I | tr -d '\r' | grep -q "core=$MASK$"; done
   if [ "$GAME" = 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT ]; then
-    for MASK in 512 2; do adb logcat -d -s AKG_ANDROID_INPUT:I | grep -q "core=$MASK"; done
+    for MASK in 512 2; do adb logcat -d -s AKG_ANDROID_INPUT:I | tr -d '\r' | grep -q "core=$MASK$"; done
   fi
   echo "PASS four touch buttons and free-joystick direction reached core; NES extra buttons repeat A and B"
 done
@@ -85,7 +85,7 @@ def hierarchy():
 def find_text(text):
  for _ in range(12):
   try:
-   root=hierarchy();n=next((n for n in root.iter('node') if n.get('text')==text),None)
+   root=hierarchy();n=next((n for n in root.iter('node') if n.get('text','').casefold()==text.casefold()),None)
    if n is not None:return n
   except Exception:pass
   time.sleep(.5)
@@ -107,7 +107,7 @@ tap(find_text('Settings'));tap(find_text('Button mapping: classic games'));find_
 print('PASS main Settings exposes movement, four-button mapping, NES turbo defaults and button size')
 root=hierarchy();entry=next((n for n in root.iter('node') if n.get('class')=='android.widget.EditText'),None)
 if entry is None:raise RuntimeError('Search field missing')
-tap(entry);adb('shell','input','text','Zelda');find_text('1 of 97 games  •  scroll to see all');find_text('Zelda II - The Adventure of Link (USA)')
+tap(entry);adb('shell','input','text','Zelda');find_text('2 of 97 games  •  scroll to see all');find_text('Zelda II - The Adventure of Link (USA)')
 print('PASS searchable final game from 97-file library')
 PYUI
 

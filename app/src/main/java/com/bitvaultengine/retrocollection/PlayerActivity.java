@@ -125,7 +125,7 @@ public final class PlayerActivity extends Activity {
         @Override public void surfaceChanged(SurfaceHolder h,int f,int w,int height){}
         @Override public void surfaceDestroyed(SurfaceHolder h){alive=false;Thread t=thread;if(t!=null){try{t.join(5000);}catch(InterruptedException ex){Thread.currentThread().interrupt();}if(!t.isAlive())thread=null;}}
         File stateFile(int slot){return new File(getFilesDir(),sha+(slot==1?".state":".slot"+slot+".state"));}
-        @Override public void run(){AudioTrack audio=null;Bitmap bitmap=null;int frames=0,cheatProbe=0;boolean sawAudio=false,sawVideo=false;int[] videoBuffer=null;
+        @Override public void run(){AudioTrack audio=null;Bitmap bitmap=null;int frames=0,cheatProbe=0;boolean sawAudio=false,sawVideo=false;int[] videoBuffer=null;boolean hardwareCanvas=true;
             try{File rom=extractRom();String coreName="NES".equals(system)?"libfceumm_libretro.so":"libsnes9x_libretro.so";File core=new File(getApplicationInfo().nativeLibraryDir,coreName);
                 if(!NativeBridge.open(core.getAbsolutePath(),rom.getAbsolutePath(),getFilesDir().getAbsolutePath()))throw new IllegalStateException("Could not open emulator core");
                 int rate=(int)NativeBridge.rate();if(rate<8000||rate>192000)rate=44100;int min=AudioTrack.getMinBufferSize(rate,AudioFormat.CHANNEL_OUT_STEREO,AudioFormat.ENCODING_PCM_16BIT);
@@ -145,7 +145,7 @@ public final class PlayerActivity extends Activity {
                     }catch(Exception stateError){request=0;runOnUiThread(()->Toast.makeText(PlayerActivity.this,"Save/load failed: "+stateError.getMessage(),Toast.LENGTH_LONG).show());}
                     if(smoke&&frames>=600){byte[] s=NativeBridge.save();if(!sawVideo||!sawAudio||s==null||!NativeBridge.restore(s))throw new IllegalStateException("Smoke failed");Log.i("AKG_ANDROID_SMOKE","PASS "+system+" video audio state input; elapsed_ms="+((System.nanoTime()-activeStart)/1_000_000));alive=false;runOnUiThread(()->finish());}
                 }else if(!audioPaused&&audio!=null){audio.pause();audio.flush();audioPaused=true;}
-                Canvas canvas=null;try{canvas=getHolder().lockCanvas();if(canvas!=null)drawFrame(canvas,bitmap);}finally{if(canvas!=null)getHolder().unlockCanvasAndPost(canvas);}
+                Canvas canvas=null;try{if(hardwareCanvas){try{canvas=getHolder().lockHardwareCanvas();}catch(IllegalStateException|UnsupportedOperationException e){hardwareCanvas=false;Log.w("AKG_ANDROID","Hardware canvas unavailable, using software",e);}}if(!hardwareCanvas)canvas=getHolder().lockCanvas();if(canvas!=null)drawFrame(canvas,bitmap);}finally{if(canvas!=null)getHolder().unlockCanvasAndPost(canvas);}
                 long now=System.nanoTime();if(paused||edit){deadline=now+33_000_000L;}else{deadline+=period;if(deadline<now-period*3)deadline=now;}
                 long wait=deadline-System.nanoTime();if(wait>0)java.util.concurrent.locks.LockSupport.parkNanos(wait);
                 }
