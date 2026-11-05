@@ -1,10 +1,10 @@
 {
   "repository": "https://github.com/midoali250/bitvault-engine",
-  "commit": "dd10789e048871746d6a09809c55221b92e1f403",
+  "commit": "e56b04f068d524ac0a7ea5596ec700a33fa6256e",
   "registry": "engine/cores/registry.json",
   "systems": [
     "NES",
     "SNES"
   ],
-  "status": "experimental-build-probe"
+  "status": "android-controls-and-pacing-fixes"
 }

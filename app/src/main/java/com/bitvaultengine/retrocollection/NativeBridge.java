@@ -6,7 +6,7 @@ public final class NativeBridge {
     public static native void step(int buttons);
     public static native int width(); public static native int height();
     public static native double rate(); public static native double fps();
-    public static native int[] video(); public static native short[] audio();
+    public static native int[] video(); public static native boolean copyVideo(int[] output); public static native int inputReadMask(); public static native short[] audio();
     public static native byte[] save(); public static native boolean restore(byte[] bytes);
     public static native void resetCheats(); public static native void setCheat(int index,String code);
     public static native int ramByte(int offset); public static native boolean testSetRamByte(int offset,int value);

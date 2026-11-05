@@ -22,19 +22,23 @@ for GAME in 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT;
     sleep 2
   done
   adb logcat -d -s AKG_ANDROID:V | grep -q 'PLAYER_READY'
-  adb shell input tap 1152 448
-  adb shell input tap 1024 512
-  adb shell input tap 1024 384
-  adb shell input tap 896 448
-  adb shell input tap 235 461
+  adb shell input swipe 1152 448 1152 448 220
+  adb shell input swipe 1024 512 1024 512 220
+  adb shell input swipe 1024 384 1024 384 220
+  adb shell input swipe 896 448 896 448 220
+  adb shell input swipe 192 461 240 461 220
   for i in $(seq 1 90); do
     if adb logcat -d -s AKG_ANDROID_SMOKE:I | grep -q 'PASS'; then break; fi
     if adb logcat -d -s AKG_ANDROID:E | grep -q 'Player failed'; then adb logcat -d -s AKG_ANDROID:E; exit 1; fi
     sleep 2
   done
   adb logcat -d -s AKG_ANDROID_SMOKE:I | grep 'PASS'
-  for MASK in 256 1 512 2 128; do adb logcat -d -s AKG_ANDROID_TOUCH:I | grep -q "mask=$MASK"; done
-  echo "PASS Android emulator touch input: A, B, X, Y and right direction"
+  for FACE in 1 2 4 8; do adb logcat -d -s AKG_ANDROID_TOUCH:I | grep -q "faces=$FACE"; done
+  for MASK in 256 1 128; do adb logcat -d -s AKG_ANDROID_INPUT:I | grep -q "core=$MASK"; done
+  if [ "$GAME" = 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT ]; then
+    for MASK in 512 2; do adb logcat -d -s AKG_ANDROID_INPUT:I | grep -q "core=$MASK"; done
+  fi
+  echo "PASS four touch buttons and free-joystick direction reached core; NES extra buttons repeat A and B"
 done
 
 # Verify the actual library About button and the requested attribution dialog.
@@ -66,6 +70,46 @@ for attempt in range(8):
  time.sleep(2)
 else:raise SystemExit('FAIL: About description not found or differs')
 PY
+
+# The library Settings button exposes all four button controls, and the full
+# game list remains navigable and searchable (not just the first screen).
+adb shell am force-stop "$PKG"
+adb logcat -c
+adb shell am start -n "$PKG/$ACT"
+python3 - <<'PYUI'
+import subprocess,time,re,xml.etree.ElementTree as ET
+
+def adb(*args):return subprocess.check_output(['adb',*args],timeout=35).decode('utf8','replace')
+def hierarchy():
+ adb('shell','uiautomator','dump','/sdcard/akg-library.xml');return ET.fromstring(adb('exec-out','cat','/sdcard/akg-library.xml'))
+def find_text(text):
+ for _ in range(12):
+  try:
+   root=hierarchy();n=next((n for n in root.iter('node') if n.get('text')==text),None)
+   if n is not None:return n
+  except Exception:pass
+  time.sleep(.5)
+ raise RuntimeError('Missing UI text: '+text)
+def tap(n):
+ b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',n.get('bounds',''))
+ if not b:raise RuntimeError('Bad bounds for '+repr(n.attrib))
+ x1,y1,x2,y2=map(int,b.groups());adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2))
+find_text('97 of 97 games  •  scroll to see all')
+root=hierarchy()
+if not any(n.get('class')=='android.widget.GridView' and n.get('scrollable')=='true' for n in root.iter('node')):raise RuntimeError('Library is not scrollable')
+for _ in range(25):
+ root=hierarchy()
+ if any(n.get('text','').startswith('Zelda II - The Adventure of Link') for n in root.iter('node')):break
+ adb('shell','input','swipe','900','550','900','180','120')
+else:raise RuntimeError('Last indexed game not visible after scrolling')
+print('PASS library count and scrolling to last indexed game')
+tap(find_text('Settings'));tap(find_text('Button mapping: classic games'));find_text('A button: A');find_text('B button: B');tap(find_text('X button: Turbo A'));tap(find_text('Turbo A'));find_text('Y button: Turbo B');tap(find_text('Done'));find_text('Move joystick and four buttons');find_text('Button size');tap(find_text('Close'))
+print('PASS main Settings exposes movement, four-button mapping, NES turbo defaults and button size')
+root=hierarchy();entry=next((n for n in root.iter('node') if n.get('class')=='android.widget.EditText'),None)
+if entry is None:raise RuntimeError('Search field missing')
+tap(entry);adb('shell','input','text','Zelda');find_text('1 of 97 games  •  scroll to see all');find_text('Zelda II - The Adventure of Link (USA)')
+print('PASS searchable final game from 97-file library')
+PYUI
 
 # Exercise moving a real control through the settings dialog and check persisted positions.
 adb shell am force-stop "$PKG"
@@ -174,13 +218,29 @@ done
 adb logcat -d -s AKG_UPDATE_TEST:I | grep 'PASS signature, tampering and version checks'
 echo 'PASS Android signed update verification self-test'
 
+# Launch every packaged game on Android, not just the two interactive smoke tests.
+adb shell am force-stop "$PKG"
+adb logcat -c
+adb shell am start -n "$PKG/$ACT" --ez akg_ci_catalog_test true
+for i in $(seq 1 600); do
+ if adb logcat -d -s AKG_ANDROID_CATALOG:I | grep -q 'PASS all '; then break; fi
+ if adb logcat -d -s AKG_ANDROID_CATALOG:E | grep -q 'FAIL'; then adb logcat -d -s AKG_ANDROID_CATALOG:E; exit 1; fi
+ sleep 2
+done
+adb logcat -d -s AKG_ANDROID_CATALOG:I | grep 'PASS all '
+echo 'PASS all Android game files produced video and audio during startup'
+
 # A dedicated non-debug certificate must permit an in-place APK version upgrade.
 adb shell am force-stop "$PKG"
 adb uninstall "$PKG"
+PRIOR=$(find prior-signed-apk -name '*.apk' -type f -print -quit)
 SIGNED=$(find signed-apk -name '*.apk' -type f -print -quit)
 NEXT=$(find signed-apk-test -name '*.apk' -type f -print -quit)
-test -n "$SIGNED" && test -n "$NEXT"
-adb install "$SIGNED"
+test -n "$PRIOR" && test -n "$SIGNED" && test -n "$NEXT"
+adb install "$PRIOR"
+adb shell dumpsys package "$PKG" | grep -q "versionCode=2"
+adb install -r "$SIGNED"
+echo "PASS previous public signed APK version 2 upgrades in-place to current signed APK"
 BASE_VERSION=$(python3 -c 'import json; print(json.load(open("updates/version.json"))["version_code"])')
 adb shell dumpsys package "$PKG" | grep -q "versionCode=$BASE_VERSION"
 adb install -r "$NEXT"
@@ -188,3 +248,5 @@ NEXT_VERSION=$((BASE_VERSION + 1))
 adb shell dumpsys package "$PKG" | grep -q "versionCode=$NEXT_VERSION"
 adb shell am start -n "$PKG/$ACT"
 echo "PASS Android APK same-certificate in-place upgrade from version $BASE_VERSION to $NEXT_VERSION"
+
+

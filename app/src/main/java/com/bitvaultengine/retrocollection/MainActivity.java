@@ -12,7 +12,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.BaseAdapter;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -30,7 +33,8 @@ public final class MainActivity extends Activity {
     private static final int BG=Color.rgb(9,16,41), FG=Color.rgb(224,235,250), MUTED=Color.rgb(158,183,216), ACCENT=Color.rgb(96,225,235);
     private final ArrayList<Game> games=new ArrayList<>();
     private UpdateClient updates;
-    private GridLayout grid; private TextView count; private String category="ALL",query="";
+    private GridView grid; private TextView count; private String category="ALL",query="";
+    private final ArrayList<Game> visibleGames=new ArrayList<>();private BaseAdapter adapter;
     static final class Game { final String id,title,system; Game(String i,String t,String s){id=i;title=t;system=s;} }
     private int dp(int x){return Math.round(x*getResources().getDisplayMetrics().density);}
     private GradientDrawable box(int color,int stroke){GradientDrawable d=new GradientDrawable();d.setColor(color);d.setCornerRadius(dp(10));d.setStroke(dp(1),stroke);return d;}
@@ -40,6 +44,7 @@ public final class MainActivity extends Activity {
         if((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0 && getIntent().getBooleanExtra("akg_update_ci_self_test",false)){
             try{UpdateSecurity.selfTest();android.util.Log.i("AKG_UPDATE_TEST","PASS signature, tampering and version checks");}catch(Exception|AssertionError error){android.util.Log.e("AKG_UPDATE_TEST","FAIL update self test",error);}finish();return;
         }
+        if((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0 && getIntent().getBooleanExtra("akg_ci_catalog_test",false)){catalogSelfTest();return;}
         updates=new UpdateClient(this);
         if((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0 && getIntent().getBooleanExtra("akg_ci_smoke",false)){
             android.content.Intent intent=new android.content.Intent(this,PlayerActivity.class);intent.putExtra("game_id",getIntent().getStringExtra("game_id"));intent.putExtra("akg_ci_smoke",true);startActivity(intent);finish();return;
@@ -51,18 +56,35 @@ public final class MainActivity extends Activity {
         build();
         updates.check(true);
     }
+    private void catalogSelfTest(){
+      new Thread(()->{File temp=null;try{
+        JSONArray rows=new JSONObject(asset("cheats/index.json")).getJSONArray("games");int passed=0;
+        for(int i=0;i<rows.length();i++){JSONObject row=rows.getJSONObject(i);String id=row.getString("source_id"),sys=row.getString("system"),ext="NES".equals(sys)?".nes":".smc";
+          byte[] bytes;try(InputStream in=getAssets().open("roms/"+id+ext)){bytes=PlayerActivity.readAll(in,10_000_000);}
+          byte[] hash=java.security.MessageDigest.getInstance("SHA-256").digest(bytes);StringBuilder hex=new StringBuilder();for(byte b:hash)hex.append(String.format(Locale.ROOT,"%02x",b&255));
+          if(!row.getString("rom_sha256").equals(hex.toString()))throw new IllegalStateException("ROM hash mismatch "+id);
+          temp=new File(getCacheDir(),"ci-catalog"+ext);try(java.io.FileOutputStream out=new java.io.FileOutputStream(temp)){out.write(bytes);}
+          String core="NES".equals(sys)?"libfceumm_libretro.so":"libsnes9x_libretro.so";
+          if(!NativeBridge.open(new File(getApplicationInfo().nativeLibraryDir,core).getAbsolutePath(),temp.getAbsolutePath(),getFilesDir().getAbsolutePath()))throw new IllegalStateException("Core open failed "+id);
+          boolean video=false,audio=false;for(int frame=0;frame<30;frame++){NativeBridge.step(0);if(NativeBridge.width()>0&&NativeBridge.height()>0)video=true;short[] pcm=NativeBridge.audio();if(pcm!=null&&pcm.length>0)audio=true;}
+          NativeBridge.close();temp.delete();if(!video||!audio)throw new IllegalStateException("No video/audio produced "+id);passed++;
+          if(passed%10==0)android.util.Log.i("AKG_ANDROID_CATALOG","progress="+passed+"/"+rows.length());
+        }
+        android.util.Log.i("AKG_ANDROID_CATALOG","PASS all "+passed+" ROM files: hash, core startup, 30 frames, audio and video");
+      }catch(Exception|LinkageError e){android.util.Log.e("AKG_ANDROID_CATALOG","FAIL catalog test",e);}finally{try{NativeBridge.close();}catch(LinkageError ignored){}if(temp!=null)temp.delete();runOnUiThread(()->finish());}},"akg-catalog-test").start();
+    }
     private Button button(String text){Button b=new Button(this);b.setText(text);b.setAllCaps(false);b.setTextColor(FG);b.setTextSize(12);b.setBackground(box(Color.rgb(28,43,76),Color.rgb(56,79,113)));return b;}
     private void build(){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(dp(20),dp(10),dp(20),dp(6));try {android.graphics.Bitmap bg=android.graphics.BitmapFactory.decodeStream(getAssets().open("menu-background.png")); root.setBackground(new android.graphics.drawable.BitmapDrawable(getResources(),bg));} catch(Exception e) {root.setBackground(new GradientDrawable(GradientDrawable.Orientation.TL_BR,new int[]{BG,Color.rgb(26,19,63)}));}
-        LinearLayout header=new LinearLayout(this);header.setGravity(Gravity.CENTER_VERTICAL);TextView title=label("AKG RETRO GAMES",22,FG);title.setTypeface(null,Typeface.BOLD);header.addView(title,new LinearLayout.LayoutParams(0,-2,1));Button update=button("Updates");update.setOnClickListener(v->updates.check());header.addView(update,new LinearLayout.LayoutParams(dp(96),dp(42)));Button about=button("About");about.setOnClickListener(v->showAbout());header.addView(about,new LinearLayout.LayoutParams(dp(96),dp(42)));root.addView(header);
-        TextView note=label("EXPERIMENTAL PLAYER — CONTROLS AND GAMES UNDER TEST",11,Color.rgb(246,183,104));root.addView(note);
+        LinearLayout header=new LinearLayout(this);header.setGravity(Gravity.CENTER_VERTICAL);TextView title=label("AKG RETRO GAMES",22,FG);title.setTypeface(null,Typeface.BOLD);header.addView(title,new LinearLayout.LayoutParams(0,-2,1));Button config=button("Settings");config.setOnClickListener(v->PlayerActivity.libraryControls(this,games.isEmpty()?null:games.get(0).id));header.addView(config,new LinearLayout.LayoutParams(dp(96),dp(42)));Button update=button("Updates");update.setOnClickListener(v->updates.check());header.addView(update,new LinearLayout.LayoutParams(dp(96),dp(42)));Button about=button("About");about.setOnClickListener(v->showAbout());header.addView(about,new LinearLayout.LayoutParams(dp(96),dp(42)));root.addView(header);
+        
         LinearLayout controls=new LinearLayout(this);controls.setGravity(Gravity.CENTER_VERTICAL);
         for(String c:new String[]{"ALL"}){Button b=button(c);LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(dp(76),dp(40));bp.setMargins(0,dp(6),dp(5),dp(6));controls.addView(b,bp);b.setOnClickListener(v->{category=c;render();});}
         EditText search=new EditText(this);search.setSingleLine(true);search.setTextColor(FG);search.setHintTextColor(MUTED);search.setHint("Search games");search.setTextSize(13);search.setPadding(dp(8),0,dp(8),0);search.setBackground(box(Color.rgb(20,32,60),Color.rgb(50,72,104)));controls.addView(search,new LinearLayout.LayoutParams(0,dp(40),1));search.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int st,int c,int a){} public void onTextChanged(CharSequence s,int st,int before,int n){query=s.toString().toLowerCase(Locale.ROOT);render();} public void afterTextChanged(Editable e){}});
-        root.addView(controls);count=label("",11,MUTED);root.addView(count);ScrollView scroll=new ScrollView(this);grid=new GridLayout(this);grid.setColumnCount(3);scroll.addView(grid);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);render();}
-    private void render(){if(grid==null)return;grid.removeAllViews();int shown=0;int width=Math.max(dp(110),(getResources().getDisplayMetrics().widthPixels-dp(70))/3);
-        for(Game g:games){if(!category.equals("ALL")&&!category.equals(g.system))continue;if(!g.title.toLowerCase(Locale.ROOT).contains(query))continue;shown++;
-            LinearLayout card=new LinearLayout(this);card.setOrientation(LinearLayout.VERTICAL);card.setPadding(dp(10),dp(10),dp(10),dp(10));card.setBackground(box(Color.rgb(22,37,66),Color.rgb(62,96,132)));TextView sys=label(g.system,11,ACCENT);card.addView(sys);TextView text=label(g.title,14,FG);text.setMaxLines(2);card.addView(text);card.setOnClickListener(v->{android.content.Intent intent=new android.content.Intent(this,PlayerActivity.class);intent.putExtra("game_id",g.id);startActivity(intent);});GridLayout.LayoutParams p=new GridLayout.LayoutParams();p.width=width;p.height=dp(76);p.setMargins(dp(3),dp(3),dp(3),dp(3));grid.addView(card,p);}
-        count.setText(shown+" games  •  developer and disclaimer: About");}
+        root.addView(controls);count=label("",11,MUTED);root.addView(count);grid=new GridView(this);grid.setNumColumns(3);grid.setHorizontalSpacing(dp(6));grid.setVerticalSpacing(dp(6));grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+        adapter=new BaseAdapter(){public int getCount(){return visibleGames.size();}public Object getItem(int position){return visibleGames.get(position);}public long getItemId(int position){return position;}
+          public View getView(int position,View recycled,ViewGroup parent){TextView text;if(recycled instanceof TextView)text=(TextView)recycled;else{text=label("",14,FG);text.setPadding(dp(10),dp(8),dp(10),dp(8));text.setGravity(Gravity.CENTER_VERTICAL);text.setMaxLines(3);text.setEllipsize(android.text.TextUtils.TruncateAt.END);text.setBackground(box(Color.rgb(22,37,66),Color.rgb(62,96,132)));text.setLayoutParams(new android.widget.AbsListView.LayoutParams(-1,dp(76)));}text.setText(visibleGames.get(position).title);return text;}};
+        grid.setAdapter(adapter);grid.setOnItemClickListener((parent,view,position,id)->{Game g=visibleGames.get(position);android.content.Intent intent=new android.content.Intent(this,PlayerActivity.class);intent.putExtra("game_id",g.id);startActivity(intent);});root.addView(grid,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);render();}
+    private void render(){if(grid==null)return;visibleGames.clear();for(Game g:games){if(!category.equals("ALL")&&!category.equals(g.system))continue;if(g.title.toLowerCase(Locale.ROOT).contains(query))visibleGames.add(g);}adapter.notifyDataSetChanged();count.setText(visibleGames.size()+" of "+games.size()+" games  •  scroll to see all");android.util.Log.i("AKG_ANDROID_LIBRARY","shown="+visibleGames.size()+" total="+games.size());}
     @Override protected void onActivityResult(int request,int result,android.content.Intent data){super.onActivityResult(request,result,data);if(updates!=null)updates.onActivityResult(request);}
     private void showAbout(){String description="This application has been developed by Ahmed Kamal Elgandy to serve as a digital archive and platform for running and optimizing classic retro and Atari-style games on mobile devices. The project aims to revive memories and preserve the software heritage of classic games with a smooth, lightweight experience, while fully respecting the intellectual property rights of the original production companies.";
         String notice;try{notice=asset("NOTICE.md");}catch(Exception e){notice="Notice unavailable";}
