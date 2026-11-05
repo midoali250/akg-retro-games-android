@@ -132,3 +132,32 @@ adb('shell','input','tap','640','50');click('Save stage / position');click('Slot
 adb('shell','input','tap','640','50');click('Load stage / position');click('Slot 2');wait_log('AKG_ANDROID_STATE','Loaded slot 2')
 print('PASS Android manual stage/position slot 2 save and restore')
 PY
+
+# Confirm the one exact-ROM memory-tested cheat is applied and reset by the SNES core.
+adb shell am force-stop "$PKG"
+adb logcat -c
+adb shell am start -n "$PKG/$ACT" --es game_id 1RW03OkSJ_ZC4fCc2fT84rtUGwqmng0dT --ez akg_ci_smoke true
+python3 - <<'PY'
+import subprocess,time,re,xml.etree.ElementTree as ET
+def adb(*args):return subprocess.check_output(['adb',*args],timeout=35).decode('utf8','replace')
+def wait(tag,text):
+ for _ in range(30):
+  if text in adb('logcat','-d','-s',tag+':I'):return
+  time.sleep(.5)
+ raise RuntimeError('Expected event missing: '+text)
+def click(text):
+ for _ in range(8):
+  adb('shell','uiautomator','dump','/sdcard/akg-cheat.xml');root=ET.fromstring(adb('exec-out','cat','/sdcard/akg-cheat.xml'))
+  node=next((n for n in root.iter('node') if n.get('text')==text),None)
+  if node is not None:
+   b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',node.get('bounds',''))
+   if b:
+    x1,y1,x2,y2=map(int,b.groups());adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2));return
+  time.sleep(.5)
+ raise RuntimeError('UI option missing: '+text)
+wait('AKG_ANDROID','PLAYER_READY')
+adb('shell','input','tap','640','50');click('Cheats');click('Lives counter 99 (memory tested)');click('Apply');wait('AKG_ANDROID_CHEAT','SMW cheat enforced')
+adb('logcat','-c')
+adb('shell','input','tap','640','50');click('Cheats');click('Lives counter 99 (memory tested)');click('Apply');wait('AKG_ANDROID_CHEAT','SMW cheat disabled')
+print('PASS Android SNES exact-ROM cheat memory enforcement and reset')
+PY

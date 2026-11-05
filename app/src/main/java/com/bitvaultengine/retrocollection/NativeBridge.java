@@ -8,6 +8,8 @@ public final class NativeBridge {
     public static native double rate(); public static native double fps();
     public static native int[] video(); public static native short[] audio();
     public static native byte[] save(); public static native boolean restore(byte[] bytes);
+    public static native void resetCheats(); public static native void setCheat(int index,String code);
+    public static native int ramByte(int offset); public static native boolean testSetRamByte(int offset,int value);
     public static native void close();
     private NativeBridge(){}
 }

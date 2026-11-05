@@ -13,6 +13,8 @@ static bool loaded,initialized; static unsigned pixel_format=RETRO_PIXEL_FORMAT_
 static uint32_t *pixels;static unsigned width,height; static int16_t *samples;static size_t sample_count;static uint32_t input_mask;static double fps=60,sample_rate=44100;
 #define AUDIO_MAX 262144
 static void (*p_deinit)(void),(*p_unload)(void),(*p_run)(void),(*p_reset_cheats)(void);
+static void (*p_cheat_set)(unsigned,bool,const char*);
+static void *(*p_memory_data)(unsigned);static size_t (*p_memory_size)(unsigned);
 static size_t (*p_state_size)(void);static bool (*p_serialize)(void*,size_t),(*p_unserialize)(const void*,size_t);
 static bool env_cb(unsigned cmd,void *data){
  switch(cmd){
@@ -49,7 +51,7 @@ JNIEXPORT jboolean JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_
  if(!core_handle||!game_path||!system_path){cleanup();return JNI_FALSE;}
  void (*set_env)(retro_environment_t),(*set_video)(retro_video_refresh_t),(*set_sample)(retro_audio_sample_t),(*set_batch)(retro_audio_sample_batch_t),(*set_poll)(retro_input_poll_t),(*set_input)(retro_input_state_t),(*init)(void);
  unsigned (*api_version)(void);void (*sysinfo)(struct retro_system_info*),(*avinfo)(struct retro_system_av_info*);bool (*load)(const struct retro_game_info*);
- LOAD(set_env,"retro_set_environment");LOAD(set_video,"retro_set_video_refresh");LOAD(set_sample,"retro_set_audio_sample");LOAD(set_batch,"retro_set_audio_sample_batch");LOAD(set_poll,"retro_set_input_poll");LOAD(set_input,"retro_set_input_state");LOAD(api_version,"retro_api_version");LOAD(init,"retro_init");LOAD(p_deinit,"retro_deinit");LOAD(sysinfo,"retro_get_system_info");LOAD(avinfo,"retro_get_system_av_info");LOAD(load,"retro_load_game");LOAD(p_unload,"retro_unload_game");LOAD(p_run,"retro_run");LOAD(p_state_size,"retro_serialize_size");LOAD(p_serialize,"retro_serialize");LOAD(p_unserialize,"retro_unserialize");LOAD(p_reset_cheats,"retro_cheat_reset");
+ LOAD(set_env,"retro_set_environment");LOAD(set_video,"retro_set_video_refresh");LOAD(set_sample,"retro_set_audio_sample");LOAD(set_batch,"retro_set_audio_sample_batch");LOAD(set_poll,"retro_set_input_poll");LOAD(set_input,"retro_set_input_state");LOAD(api_version,"retro_api_version");LOAD(init,"retro_init");LOAD(p_deinit,"retro_deinit");LOAD(sysinfo,"retro_get_system_info");LOAD(avinfo,"retro_get_system_av_info");LOAD(load,"retro_load_game");LOAD(p_unload,"retro_unload_game");LOAD(p_run,"retro_run");LOAD(p_state_size,"retro_serialize_size");LOAD(p_serialize,"retro_serialize");LOAD(p_unserialize,"retro_unserialize");LOAD(p_reset_cheats,"retro_cheat_reset");LOAD(p_cheat_set,"retro_cheat_set");LOAD(p_memory_data,"retro_get_memory_data");LOAD(p_memory_size,"retro_get_memory_size");
  if(api_version()!=1){cleanup();return JNI_FALSE;}samples=malloc(AUDIO_MAX*sizeof(int16_t));if(!samples){cleanup();return JNI_FALSE;}
  set_env(env_cb);set_video(video_cb);set_sample(audio_sample);set_batch(audio_batch);set_poll(input_poll);set_input(input_state);init();initialized=true;
  struct retro_system_info info={0};sysinfo(&info);struct retro_game_info gi={0};gi.path=game_path;
@@ -66,3 +68,8 @@ JNIEXPORT jshortArray JNICALL Java_com_bitvaultengine_retrocollection_NativeBrid
 JNIEXPORT jbyteArray JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_save(JNIEnv*e,jclass c){(void)c;if(!loaded)return NULL;size_t n=p_state_size();if(!n||n>100000000)return NULL;void *buf=malloc(n);if(!buf)return NULL;if(!p_serialize(buf,n)){free(buf);return NULL;}jbyteArray a=(*e)->NewByteArray(e,(jsize)n);if(a)(*e)->SetByteArrayRegion(e,a,0,(jsize)n,(jbyte*)buf);free(buf);return a;}
 JNIEXPORT jboolean JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_restore(JNIEnv*e,jclass c,jbyteArray a){(void)c;if(!loaded||!a)return JNI_FALSE;jsize n=(*e)->GetArrayLength(e,a);if(n<=0||(size_t)n!=p_state_size())return JNI_FALSE;jbyte *b=(*e)->GetByteArrayElements(e,a,NULL);if(!b)return JNI_FALSE;bool ok=p_unserialize(b,(size_t)n);(*e)->ReleaseByteArrayElements(e,a,b,JNI_ABORT);return ok?JNI_TRUE:JNI_FALSE;}
 JNIEXPORT void JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_close(JNIEnv*e,jclass c){(void)e;(void)c;cleanup();}
+
+JNIEXPORT void JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_resetCheats(JNIEnv *e,jclass c){(void)e;(void)c;if(loaded)p_reset_cheats();}
+JNIEXPORT void JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_setCheat(JNIEnv *e,jclass c,jint index,jstring code){(void)c;if(!loaded||index<0||!code)return;const char *v=(*e)->GetStringUTFChars(e,code,NULL);if(v){p_cheat_set((unsigned)index,true,v);(*e)->ReleaseStringUTFChars(e,code,v);}}
+JNIEXPORT jint JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_ramByte(JNIEnv *e,jclass c,jint offset){(void)e;(void)c;if(!loaded||offset<0)return -1;uint8_t *p=p_memory_data(RETRO_MEMORY_SYSTEM_RAM);size_t n=p_memory_size(RETRO_MEMORY_SYSTEM_RAM);return p&&(size_t)offset<n?p[offset]:-1;}
+JNIEXPORT jboolean JNICALL Java_com_bitvaultengine_retrocollection_NativeBridge_testSetRamByte(JNIEnv *e,jclass c,jint offset,jint value){(void)e;(void)c;if(!loaded||offset<0||value<0||value>255)return JNI_FALSE;uint8_t *p=p_memory_data(RETRO_MEMORY_SYSTEM_RAM);size_t n=p_memory_size(RETRO_MEMORY_SYSTEM_RAM);if(!p||(size_t)offset>=n)return JNI_FALSE;p[offset]=(uint8_t)value;return JNI_TRUE;}
