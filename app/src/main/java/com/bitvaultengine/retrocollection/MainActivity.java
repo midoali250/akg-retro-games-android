@@ -37,11 +37,11 @@ public final class MainActivity extends Activity {
     private TextView label(String s,int size,int color){TextView t=new TextView(this);t.setText(s);t.setTextSize(size);t.setTextColor(color);return t;}
     private String asset(String name) throws Exception {try(InputStream in=getAssets().open(name);ByteArrayOutputStream out=new ByteArrayOutputStream()){byte[] b=new byte[4096];int n;while((n=in.read(b))!=-1)out.write(b,0,n);return out.toString(StandardCharsets.UTF_8.name());}}
     @Override public void onCreate(Bundle state){super.onCreate(state);getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        if(getIntent().getBooleanExtra("akg_update_ci_self_test",false)){
+        if((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0 && getIntent().getBooleanExtra("akg_update_ci_self_test",false)){
             try{UpdateSecurity.selfTest();android.util.Log.i("AKG_UPDATE_TEST","PASS signature, tampering and version checks");}catch(Exception|AssertionError error){android.util.Log.e("AKG_UPDATE_TEST","FAIL update self test",error);}finish();return;
         }
         updates=new UpdateClient(this);
-        if(getIntent().getBooleanExtra("akg_ci_smoke",false)){
+        if((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0 && getIntent().getBooleanExtra("akg_ci_smoke",false)){
             android.content.Intent intent=new android.content.Intent(this,PlayerActivity.class);intent.putExtra("game_id",getIntent().getStringExtra("game_id"));intent.putExtra("akg_ci_smoke",true);startActivity(intent);finish();return;
         }
         try {JSONObject root=new JSONObject(asset("drive-index.json"));JSONArray a=root.getJSONArray("files"),excluded=root.getJSONArray("excluded_ids");

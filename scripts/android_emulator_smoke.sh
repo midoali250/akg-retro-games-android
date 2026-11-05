@@ -173,3 +173,16 @@ for i in $(seq 1 20); do
 done
 adb logcat -d -s AKG_UPDATE_TEST:I | grep 'PASS signature, tampering and version checks'
 echo 'PASS Android signed update verification self-test'
+
+# A dedicated non-debug certificate must permit an in-place APK version upgrade.
+adb shell am force-stop "$PKG"
+adb uninstall "$PKG"
+SIGNED=$(find signed-apk -name '*.apk' -type f -print -quit)
+NEXT=$(find signed-apk-test -name '*.apk' -type f -print -quit)
+test -n "$SIGNED" && test -n "$NEXT"
+adb install "$SIGNED"
+adb shell dumpsys package "$PKG" | grep -q 'versionCode=2'
+adb install -r "$NEXT"
+adb shell dumpsys package "$PKG" | grep -q 'versionCode=3'
+adb shell am start -n "$PKG/$ACT"
+echo 'PASS Android APK same-certificate in-place upgrade from version 2 to 3'
