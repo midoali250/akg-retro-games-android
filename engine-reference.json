@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/midoali250/bitvault-engine",
+  "commit": "4eb0473490357c1fc8b8d86af4e4f794632b9746",
+  "registry": "engine/cores/registry.json",
+  "systems": [
+    "NES",
+    "SNES"
+  ],
+  "status": "experimental-build-probe"
+}
