@@ -1,0 +1,23 @@
+name: Audit supplied game files
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate headers and fingerprint supplied files
+        run: python check_drive_roms.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: drive-rom-audit
+          path: drive-rom-audit.json
+          if-no-files-found: error
+          retention-days: 14
