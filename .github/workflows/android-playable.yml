@@ -42,6 +42,8 @@ jobs:
           mkdir -p app/src/main/assets/roms app/src/main/assets/cheats
           cp package-roms/* app/src/main/assets/roms/
           cp cheats/index.json app/src/main/assets/cheats/index.json
+          mkdir -p app/src/main/assets/updates
+          cp updates/public-key.json app/src/main/assets/updates/public-key.json
       - name: Build experimental debug APK
         run: ./gradlew :app:assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
