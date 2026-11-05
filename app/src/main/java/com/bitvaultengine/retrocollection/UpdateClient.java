@@ -41,15 +41,16 @@ final class UpdateClient {
     private static byte[] limited(InputStream in,int max)throws Exception{ByteArrayOutputStream out=new ByteArrayOutputStream();byte[] b=new byte[8192];int n,total=0;while((n=in.read(b))!=-1){total+=n;if(total>max)throw new SecurityException("Manifest too large");out.write(b,0,n);}return out.toByteArray();}
     private void onUi(Runnable r){activity.runOnUiThread(()->{if(!activity.isFinishing()&&!activity.isDestroyed())r.run();});}
     private void message(String title,String text){new AlertDialog.Builder(activity).setTitle(title).setMessage(text).setPositiveButton("OK",null).show();}
-    void check(){
-        if(busy)return;busy=true;android.widget.Toast.makeText(activity,"Checking Android updates…",android.widget.Toast.LENGTH_SHORT).show();
+    void check(){check(false);}
+    void check(boolean quiet){
+        if(busy)return;busy=true;if(!quiet)android.widget.Toast.makeText(activity,"Checking Android updates…",android.widget.Toast.LENGTH_SHORT).show();
         new Thread(()->{try{
             JSONObject config;try(InputStream in=activity.getAssets().open("updates/public-key.json")){config=new JSONObject(new String(limited(in,4096),StandardCharsets.UTF_8));}
             if(!"android".equals(config.getString("platform"))||!"Ed25519".equals(config.getString("algorithm")))throw new SecurityException("Invalid update key");byte[] key=Base64.decode(config.getString("public_key_base64"),Base64.DEFAULT);
-            HttpURLConnection c=open(MANIFEST);int status=c.getResponseCode();if(status==404){c.disconnect();onUi(()->{busy=false;message("Updates","No Android update has been published yet.");});return;}if(status!=200){c.disconnect();throw new IllegalStateException("Update server returned "+status);}byte[] body;try(InputStream in=c.getInputStream()){body=limited(in,131072);}finally{c.disconnect();}
+            HttpURLConnection c=open(MANIFEST);int status=c.getResponseCode();if(status==404){c.disconnect();onUi(()->{busy=false;if(!quiet)message("Updates","No Android update has been published yet.");});return;}if(status!=200){c.disconnect();throw new IllegalStateException("Update server returned "+status);}byte[] body;try(InputStream in=c.getInputStream()){body=limited(in,131072);}finally{c.disconnect();}
             PackageInfo installed=activity.getPackageManager().getPackageInfo(activity.getPackageName(),0);long version=Build.VERSION.SDK_INT>=28?installed.getLongVersionCode():installed.versionCode;UpdateSecurity.Release release=UpdateSecurity.verify(body,key,version);
-            onUi(()->{busy=false;if(release==null){message("Updates","This Android version is up to date.");return;}new AlertDialog.Builder(activity).setTitle("Android update available").setMessage("Version "+release.version+" is available. Download and verify it?").setPositiveButton("Download",(d,w)->download(release)).setNegativeButton("Later",null).show();});
-        }catch(Exception e){onUi(()->{busy=false;message("Update check failed","Could not verify the Android update: "+e.getClass().getSimpleName());});}},"akg-update-check").start();
+            onUi(()->{busy=false;if(release==null){if(!quiet)message("Updates","This Android version is up to date.");return;}new AlertDialog.Builder(activity).setTitle("Android update available").setMessage("Version "+release.version+" is available. Download and verify it?").setPositiveButton("Download",(d,w)->download(release)).setNegativeButton("Later",null).show();});
+        }catch(Exception e){onUi(()->{busy=false;if(!quiet)message("Update check failed","Could not verify the Android update: "+e.getClass().getSimpleName());});}},"akg-update-check").start();
     }
     private void download(UpdateSecurity.Release release){if(busy)return;busy=true;android.widget.Toast.makeText(activity,"Downloading verified update…",android.widget.Toast.LENGTH_LONG).show();new Thread(()->{
         File dir=new File(activity.getCacheDir(),"updates"),tmp=new File(dir,"download.part"),dest=new File(dir,"verified.apk");try{

@@ -49,6 +49,7 @@ public final class MainActivity extends Activity {
                 if(skip)continue;String system=lower.endsWith(".nes")?"NES":(lower.endsWith(".smc")||lower.endsWith(".sfc")?"SNES":null);if(system!=null)games.add(new Game(id,name.substring(0,name.lastIndexOf('.')),system));}
         }catch(Exception e){new AlertDialog.Builder(this).setTitle("Catalog error").setMessage(e.getMessage()).setPositiveButton("OK",null).show();}
         build();
+        updates.check(true);
     }
     private Button button(String text){Button b=new Button(this);b.setText(text);b.setAllCaps(false);b.setTextColor(FG);b.setTextSize(12);b.setBackground(box(Color.rgb(28,43,76),Color.rgb(56,79,113)));return b;}
     private void build(){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(dp(20),dp(10),dp(20),dp(6));try {android.graphics.Bitmap bg=android.graphics.BitmapFactory.decodeStream(getAssets().open("menu-background.png")); root.setBackground(new android.graphics.drawable.BitmapDrawable(getResources(),bg));} catch(Exception e) {root.setBackground(new GradientDrawable(GradientDrawable.Orientation.TL_BR,new int[]{BG,Color.rgb(26,19,63)}));}
