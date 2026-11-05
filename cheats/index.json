@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Exact ROM identity only; empty arrays are not functional cheats or stage selectors.",
+  "note": "Cheat entries are exact-ROM only. A verified entry records its precise evidence and verification scope; empty arrays remain unsupported.",
   "games": [
     {
       "source_id": "11PexIb6Tk9wnVvOV9Q0PQNKPj_z3MOqV",
@@ -655,7 +655,17 @@
       "title": "Super Mario World (U) [!].smc",
       "system": "SNES",
       "rom_sha256": "d70c9c7716ad12c674fc7dd744736aa48d4d7b4237f58066be620fda26024872",
-      "verified_cheats": [],
+      "verified_cheats": [
+        {
+          "name": "Lives counter 99 (memory tested)",
+          "code": "7E0DBE63",
+          "rom_sha256": "d70c9c7716ad12c674fc7dd744736aa48d4d7b4237f58066be620fda26024872",
+          "verified": true,
+          "verification_scope": "SNES core memory enforcement and reset tested on exact ROM; not a full gameplay test",
+          "evidence": "https://github.com/midoali250/akg-retro-games-linux/actions/runs/41991731610",
+          "source": "https://github.com/libretro/libretro-database/blob/6099988fec4c52a4a7294a619795f4b983cf6bb1/cht/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/Super%20Mario%20World%20(USA).cht"
+        }
+      ],
       "verified_stage_select": []
     },
     {

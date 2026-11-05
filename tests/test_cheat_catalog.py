@@ -10,7 +10,13 @@ class CheatCatalogTests(unittest.TestCase):
    self.assertEqual(verified_for_file(db,rom),[code]);rom.write_bytes(b'other');self.assertEqual(verified_for_file(db,rom),[])
    rom.write_bytes(b'test-game');code['verified']=False;db.write_text(json.dumps({'schema_version':1,'games':[{'rom_sha256':sha,'verified_cheats':[code]}]}))
    with self.assertRaises(ValueError):verified_for_file(db,rom)
- def test_collection_index_has_no_fabricated_cheats(self):
+ def test_collection_codes_are_exact_and_have_evidence(self):
   data=json.loads(Path('cheats/index.json').read_text());self.assertEqual(len(data['games']),97)
-  self.assertTrue(all(len(x['rom_sha256'])==64 and not x['verified_cheats'] and not x['verified_stage_select'] for x in data['games']))
+  count=0
+  for game in data['games']:
+   self.assertEqual(len(game['rom_sha256']),64)
+   for cheat in game['verified_cheats']:
+    self.assertTrue(cheat['verified']);self.assertEqual(cheat['rom_sha256'],game['rom_sha256'])
+    self.assertTrue(cheat.get('source'));self.assertTrue(cheat.get('evidence'));self.assertTrue(cheat.get('verification_scope'));count+=1
+  self.assertEqual(count,1)
 if __name__=='__main__':unittest.main()
