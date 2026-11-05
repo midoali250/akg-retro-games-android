@@ -10,6 +10,18 @@ repo=os.environ['GITHUB_REPOSITORY'];prefix='midoali250/akg-retro-games-'
 if not repo.startswith(prefix):raise SystemExit('Unexpected repository')
 platform=repo[len(prefix):];extensions={'android':'.apk','windows':'.exe','linux':'.appimage','macos':'.zip'}
 if platform not in extensions:raise SystemExit('Unsupported platform')
+if os.environ.get('TEST_ONLY','').lower()=='true':
+ import base64
+ with tempfile.TemporaryDirectory(prefix='akg-signing-test-') as tmp:
+  name='akg-update-test'+extensions[platform];asset=Path(tmp)/name;asset.write_bytes(b'AKG signing integration test; not a release')
+  url='https://github.com/'+repo+'/releases/download/v3/'+name;out=Path(tmp)/'manifest.json'
+  subprocess.run([sys.executable,'engine-source/updates/publisher/python/sign_manifest.py','--asset',str(asset),'--platform',platform,'--version-code','3','--url',url,'--public-key','updates/public-key.json','--output',str(out)],check=True,timeout=120)
+  sys.path.insert(0,'engine-source/updates/client/python');from signed_updates import verify_manifest
+  cfg=json.loads(Path('updates/public-key.json').read_text());key=base64.b64decode(cfg['public_key_base64'],validate=True)
+  value=verify_manifest(out.read_bytes(),key,'akg-retro-games',platform,2,{('github.com',443)})
+  if value['version_code']!=3 or value['size_bytes']!=asset.stat().st_size:raise RuntimeError('Signed test failed')
+ print('PASS real platform secret signed a test package; pinned public key verified it. No release was published.')
+ sys.exit(0)
 tag=os.environ.get('RELEASE_TAG','');version=os.environ.get('VERSION_CODE','');requested=os.environ.get('ASSET_NAME','');event=os.environ.get('EVENT_NAME','')
 if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._+\-]{0,99}',tag):raise SystemExit('Invalid release tag')
 if not version:

@@ -10,6 +10,11 @@ on:
       version_code:
         description: Strictly increasing integer version code
         required: true
+      test_only:
+        description: Test signing without publishing a release
+        type: boolean
+        default: false
+        required: false
       asset_name:
         description: Exact release asset name (optional if only one platform asset)
         required: false
@@ -28,7 +33,9 @@ jobs:
           repository: midoali250/bitvault-engine
           ref: 8c3814deeeb48cf82454f5148d942cab302c2616
           path: engine-source
-          sparse-checkout: updates/publisher/python
+          sparse-checkout: |
+            updates/publisher/python
+            updates/client/python
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -41,4 +48,5 @@ jobs:
           VERSION_CODE: ${{ inputs.version_code }}
           ASSET_NAME: ${{ inputs.asset_name }}
           EVENT_NAME: ${{ github.event_name }}
+          TEST_ONLY: ${{ inputs.test_only }}
         run: python scripts/publish_signed_update.py
