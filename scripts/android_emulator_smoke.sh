@@ -104,3 +104,31 @@ for _ in range(10):
  time.sleep(1)
 else:raise SystemExit('FAIL: moved A position was not persisted')
 PY
+
+# Verify the in-game settings can save and restore a chosen manual stage/position slot.
+adb shell am force-stop "$PKG"
+adb logcat -c
+adb shell am start -n "$PKG/$ACT" --es game_id 1TuDbnOzqjx3Z0WKKuc3zkRrLAR7F_pwf --ez akg_ci_smoke true
+python3 - <<'PY'
+import subprocess,time,re,xml.etree.ElementTree as ET
+def adb(*args):return subprocess.check_output(['adb',*args],timeout=35).decode('utf-8','replace')
+def wait_log(tag,text):
+ for _ in range(30):
+  if text in adb('logcat','-d','-s',tag+':I'):return
+  time.sleep(.5)
+ raise RuntimeError('Missing expected '+tag+' event: '+text)
+def click(text):
+ for _ in range(8):
+  adb('shell','uiautomator','dump','/sdcard/akg-slot.xml');root=ET.fromstring(adb('exec-out','cat','/sdcard/akg-slot.xml'))
+  node=next((n for n in root.iter('node') if n.get('text')==text),None)
+  if node is not None:
+   b=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',node.get('bounds',''))
+   if b:
+    x1,y1,x2,y2=map(int,b.groups());adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2));return
+  time.sleep(.5)
+ raise RuntimeError('Settings option missing: '+text)
+wait_log('AKG_ANDROID','PLAYER_READY')
+adb('shell','input','tap','640','50');click('Save stage / position');click('Slot 2');wait_log('AKG_ANDROID_STATE','Saved slot 2')
+adb('shell','input','tap','640','50');click('Load stage / position');click('Slot 2');wait_log('AKG_ANDROID_STATE','Loaded slot 2')
+print('PASS Android manual stage/position slot 2 save and restore')
+PY
